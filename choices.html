@@ -6,7 +6,41 @@
 
 <body>
   <div class="device">
-    choices
+    <h1>Choices</h1>
+
+    <!-- Radio Button Section -->
+    <h2>Select an Option (Radio Buttons)</h2>
+    <form id="choice-form">
+      <label>
+        <input type="radio" name="radioChoice" value="Option A">
+        Option A
+      </label><br>
+      <label>
+        <input type="radio" name="radioChoice" value="Option B">
+        Option B
+      </label><br>
+      <label>
+        <input type="radio" name="radioChoice" value="Option C">
+        Option C
+      </label><br>
+
+      <!-- Dropdown Section -->
+      <h2>Select a Category (Dropdown)</h2>
+      <label for="dropdown">Choose a category:</label>
+      <select id="dropdown">
+        <option value="Category 1">Category 1</option>
+        <option value="Category 2">Category 2</option>
+        <option value="Category 3">Category 3</option>
+      </select><br><br>
+
+      <!-- Submit Button -->
+      <button type="button" onclick="displayChoices()">Submit Choices</button>
+    </form>
+
+    <!-- Display Area -->
+    <h3>Your Choices:</h3>
+    <p id="output">Please select your options above and click submit.</p>
+
 
     <!-- Navbar at the bottom -->
     <div class="navbar">
@@ -19,6 +53,6 @@
     </div>
   </div>
 
-<script src="script.js"></script>
+<script src="choices-script.js"></script>
 </body>
 </html>

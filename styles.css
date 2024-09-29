@@ -189,10 +189,9 @@ input {
   padding: 8px 0;
   position: absolute;
   z-index: 1;
-  bottom: 125%;
+  bottom: 100%;
   left: 50%;
   margin-left: -100px;
-  margin-top: 20px;
 }
 
 /* Popup arrow */

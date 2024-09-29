@@ -213,6 +213,12 @@ input {
   animation: fadeIn 1s
 }
 
+.lr {
+  position:absolute;
+  bottom:50;
+  right:50;
+}
+
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
   from {opacity: 0;}

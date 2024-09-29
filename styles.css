@@ -191,7 +191,7 @@ input {
   z-index: 1;
   bottom: 125%;
   left: 50%;
-  margin-left: -80px;
+  margin-left: 0px;
 }
 
 /* Popup arrow */
@@ -200,7 +200,7 @@ input {
   position: absolute;
   top: 100%;
   left: 50%;
-  margin-left: -5px;
+  margin-left: 0px;
   border-width: 5px;
   border-style: solid;
   border-color: #555 transparent transparent transparent;

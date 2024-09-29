@@ -191,7 +191,8 @@ input {
   z-index: 1;
   bottom: 125%;
   left: 50%;
-  margin-left: 100px;
+  margin-left: -100px;
+  margin-top: 20px;
 }
 
 /* Popup arrow */
@@ -203,7 +204,7 @@ input {
   margin-left: 0px;
   border-width: 5px;
   border-style: solid;
-  border-color: #555 transparent transparent transparent;
+  border-color: #0F52BA transparent transparent transparent;
 }
 
 /* Toggle this class when clicking on the popup container (hide and show the popup) */

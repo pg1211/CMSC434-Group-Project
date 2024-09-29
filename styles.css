@@ -129,7 +129,7 @@ ul li.checked::before {
 .header {
   background-color: cornflowerblue;
   padding: 30px 40px;
-  color: white;
+  color: black;
   text-align: center;
 }
 

@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(31, 31, 31);
+  background-color: rgb(222, 222, 222);
 }
 
 .device {
@@ -10,3 +10,13 @@ body {
     background-color: white;
     position: relative;
 }
+
+
+
+/* standard colors: 
+background: white
+accent: teal
+header font color: teal
+in item font color: white
+icons: white
+*/

@@ -1,16 +1,28 @@
 <html lang="en">
+
 <head>
-  <title>Profile</title>
+  <title>Inventory</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="inventory.css">
 </head>
 
 <body>
   <div class="device">
-
+    <div class="container">
+      <h1>Kitchen Inventory</h1>
+      <form id="inventoryForm">
+        <input type="text" id="item" placeholder="Add an item" required>
+        <input type="number" id="quantity" placeholder="Quantity" required min="1">
+        <button type="submit">Add Item</button>
+      </form>
+      <div id="inventoryList">
+        <h2>Current Inventory</h2>
+        <ul id="items"></ul>
+      </div>
+    </div>
   </div>
-
 
   <script src="inventory.js"></script>
 </body>
+
 </html>

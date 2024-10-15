@@ -8,17 +8,34 @@
 
 <body>
   <div class="device">
-    <div class="container">
-      <h1>Kitchen Inventory</h1>
-      <form id="inventoryForm">
-        <input type="text" id="item" placeholder="Add an item" required>
-        <input type="number" id="quantity" placeholder="Quantity" required min="1">
-        <button type="submit">Add Item</button>
-      </form>
-      <div id="inventoryList">
-        <h2>Current Inventory</h2>
-        <ul id="items"></ul>
+
+    <!-- Region dropdown -->
+    <div class="region-dropdown">
+      <select id="region-select">
+        <option value="fridge">Fridge</option>
+        <!-- More regions as needed -->
+        <option value="add-region">Add region...</option>
+      </select>
+    </div>
+
+    <!-- Popout for adding a new region -->
+    <div id="add-region-popup" class="popup">
+      <div class="popup-content">
+        <label for="new-region-name">New Region Name:</label>
+        <input type="text" id="new-region-name" placeholder="Enter region name">
+        <div class="popup-buttons">
+          <button id="add-region-btn">Add</button>
+          <button id="cancel-region-btn">Cancel</button>
+        </div>
       </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+      <a href="inventory.html" class="active">Inventory</a>
+      <a href="shopping-lists.html">Shopping</a>
+      <a href="recipes.html">Recipes</a>
+      <a href="profile.html">Profiles</a>
     </div>
   </div>
 

@@ -3,15 +3,16 @@ body {
 }
 
 .device {
-    margin: auto;
-    width: 640px;
-    height: 960px;
-    overflow: hidden;
-    background-color: white;
-    position: relative;
+  margin: auto;
+  width: 640px;
+  height: 960px;
+  overflow: hidden;
+  background-color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
-
 
 /* standard colors: 
 background: white
@@ -20,3 +21,36 @@ header font color: teal
 in item font color: white
 icons: white
 */
+
+/* Navigation Bar */
+.navbar {
+  width: 100%;
+  background-color: rgb(5, 185, 185);
+  display: flex;
+  justify-content: space-around;
+  padding: 0 0;
+  border-top: 5px solid rgba(0, 0, 0, 0.1);
+  position: absolute;
+  bottom: 0;
+  height: 110px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+  text-align: center;
+  padding: 40px 20px;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  height: 100%; 
+}
+
+.navbar a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar a.active {
+  background-color: rgba(0, 0, 0, 0.1); /* Darker background for active tab */
+}

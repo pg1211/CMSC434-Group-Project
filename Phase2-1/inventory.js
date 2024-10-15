@@ -1,31 +1,21 @@
-// Get elements from the DOM
-const form = document.getElementById('inventoryForm');
-const itemList = document.getElementById('items');
-
-// Event listener for adding an item
-form.addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    // Get the item and quantity from input fields
-    const itemName = document.getElementById('item').value;
-    const itemQuantity = document.getElementById('quantity').value;
-
-    // Create a new list item
-    const li = document.createElement('li');
-    li.innerHTML = `
-        ${itemName} (x${itemQuantity})
-        <button class="delete-btn">Delete</button>
-    `;
-
-    // Append the new item to the list
-    itemList.appendChild(li);
-
-    // Clear input fields
-    document.getElementById('item').value = '';
-    document.getElementById('quantity').value = '';
-
-    // Add delete functionality to the button
-    li.querySelector('.delete-btn').addEventListener('click', function () {
-        li.remove();
-    });
-});
+document.getElementById('region-select').addEventListener('change', function() {
+    if (this.value === 'add-region') {
+      document.getElementById('add-region-popup').style.display = 'block';
+    }
+  });
+  
+  document.getElementById('cancel-region-btn').addEventListener('click', function() {
+    document.getElementById('add-region-popup').style.display = 'none';
+  });
+  
+  document.getElementById('add-region-btn').addEventListener('click', function() {
+    const newRegion = document.getElementById('new-region-name').value;
+    if (newRegion) {
+      const select = document.getElementById('region-select');
+      const newOption = document.createElement('option');
+      newOption.value = newRegion.toLowerCase().replace(/\s+/g, '-');
+      newOption.text = newRegion;
+      select.add(newOption, select.options.length - 1);
+      document.getElementById('add-region-popup').style.display = 'none';
+    }
+  });

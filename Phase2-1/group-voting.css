@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+.button-name{
+    display: flex;
+    min-width: 100px;
+    flex-direction: row;
+    gap: 10px
+}
+
+body {
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+h2 {
+    text-align: left;
+    font-size: 50px;
+}
+.recipe-block{
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    align-items: left;
+    justify-content: left;
+    gap: 30px;
+
+  
+}
+.button-box{
+    display: flex;
+
+}
+.plus{
+    display: flex;
+    max-width: 600px;
+    min-width: 10px;
+    margin: 0 auto;
+    background-color: green;
+    padding: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    align-content: center;
+    justify-content: center;
+}
+.minus{
+    display: flex;
+    max-width: 600px;
+    min-width: 30px;
+    min-height: 30px;
+    margin: 0 auto;
+    background-color: red;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    align-content: center;
+    justify-content: center;
+
+}
+.recipe{
+    display: flex;
+    flex-direction: row;
+    max-width: 600px;
+    min-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    align-items: left;
+    justify-content: left;
+    gap: 10px;
+
+  
+}
+.recipe b{
+    margin-left: 100px;
+}
+.backcontainer{
+    display: flex;
+    flex-direction: column;
+}
+.back{
+    display: flex;
+    max-width: 100px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    cursor:pointer;
+}
+.container {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
+
+}

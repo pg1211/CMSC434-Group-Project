@@ -1,7 +1,9 @@
 /***
  * Needed a lot of help for this one. :3
  * General idea is that all data is stored in localStorage with inventory being the key, and the 
- * value being stored is stringified JSON. I've attached all of my sources for topics referenced below.
+ * value being stored is stringified JSON, which can then be parsed out when needed.
+ * I've attached my sources for general topics referenced below.
+ * Any more specific cases I've referenced are above where they are used.
  * 
  * localStorage
  * https://www.w3schools.com/jsref/prop_win_localstorage.asp
@@ -12,17 +14,26 @@
  * HTML DOM Manipulation
  * https://www.w3schools.com/js/js_htmldom_methods.asp
  * 
+ * Inner HTML
+ * https://www.w3schools.com/jsref/prop_html_innerhtml.asp
+ * 
+ * Event listener
+ * https://www.w3schools.com/js/js_htmldom_eventlistener.asp
  */
 
-const inventory = JSON.parse(localStorage.getItem('inventory')) || {
-    "categories": ["Produce", "Meat", "Dairy"],
-    "items": []
-};
+// Setting inventory to the current existing mapping or creating a new empty inventory if does not exist
+const inventory = JSON.parse(localStorage.getItem('inventory'));
+if (inventory == null) {
+    inventory = {
+        "categories": ["Produce", "Meat", "Dairy"],
+        "items": []
+    };
+}
 
-// Save inventory to localStorage if not already saved
+// Save inventory to localStorage
 localStorage.setItem('inventory', JSON.stringify(inventory));
 
-// Load categories into the dropdown
+// Load categories into the dropdown for the filter section and the edit/add popups
 const categoryDropdown = document.getElementById('categoryDropdown');
 const itemCategory = document.getElementById('itemCategory');
 inventory.categories.forEach(category => {
@@ -31,7 +42,8 @@ inventory.categories.forEach(category => {
     option.textContent = category;
     categoryDropdown.appendChild(option);
 
-    // Load categories in the popup form as well
+    // Load categories in the popup form as well.
+    // For cloneNode, https://www.w3schools.com/jsref/met_node_clonenode.asp was referenced
     let categoryOption = option.cloneNode(true);
     itemCategory.appendChild(categoryOption);
 });
@@ -43,7 +55,11 @@ const renderItems = (category) => {
 
     const items = JSON.parse(localStorage.getItem('inventory')).items;
     // For filtering, https://www.w3schools.com/jsref/jsref_filter.asp was referenced
-    const filteredItems = category === 'all' ? items : items.filter(item => item.category === category);
+    if (category == 'all') {
+        filteredItems = items;
+    } else {
+        filteredItems = items.filter(item => item.category == category)
+    }
 
     filteredItems.forEach((item, index) => {
         const li = document.createElement('li');
@@ -52,10 +68,10 @@ const renderItems = (category) => {
     });
 };
 
-// Initial render showing all items
+// Initial render with All categories
 renderItems('all');
 
-// Filter
+// Re-render the page with the selected filter option
 document.getElementById('filterButton').addEventListener('click', () => {
     const selectedCategory = categoryDropdown.value;
     renderItems(selectedCategory);
@@ -128,6 +144,7 @@ itemForm.addEventListener('submit', (e) => {
 // Delete item
 deleteItemButton.addEventListener('click', () => {
     if (editIndex !== null) {
+        // For splicing, https://www.w3schools.com/jsref/jsref_splice.asp was referenced
         inventory.items.splice(editIndex, 1);
         localStorage.setItem('inventory', JSON.stringify(inventory));
         renderItems(categoryDropdown.value);

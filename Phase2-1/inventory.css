@@ -58,7 +58,7 @@ button:hover {
     padding: 20px;
     flex-grow: 1;
     overflow-y: auto;
-    padding-bottom: 120px;
+    padding-bottom: 105px;
     /* Padding at bottom causes menu bottom to move up! :D thank god! */
 }
 

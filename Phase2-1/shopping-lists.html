@@ -3,11 +3,24 @@
 <head>
   <title>Shopping</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="shopping-list.css">
+  <link rel="stylesheet" href="shopping-lists.css">
 </head>
 
 <body>
   <div class="device">
+
+    <h1>Shopping Lists</h1>
+
+    <!-- Shopping List Entry Form -->
+    <div class="list-container">
+      <form id="shopping-form">
+        <input type="text" id="item-input" placeholder="Add a shopping item" required>
+        <button type="submit">Add Item</button>
+      </form>
+      
+      <!-- Shopping List Display -->
+      <ul id="shopping-list"></ul>
+    </div>
 
     <div class="navbar">
       <a href="inventory.html">Inventory</a>

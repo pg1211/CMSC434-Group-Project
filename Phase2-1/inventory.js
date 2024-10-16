@@ -1,3 +1,19 @@
+/***
+ * Needed a lot of help for this one. :3
+ * General idea is that all data is stored in localStorage with inventory being the key, and the 
+ * value being stored is stringified JSON. I've attached all of my sources for topics referenced below.
+ * 
+ * localStorage
+ * https://www.w3schools.com/jsref/prop_win_localstorage.asp
+ * 
+ * Stringifying
+ * https://www.w3schools.com/js/js_json_stringify.asp
+ * 
+ * HTML DOM Manipulation
+ * https://www.w3schools.com/js/js_htmldom_methods.asp
+ * 
+ */
+
 const inventory = JSON.parse(localStorage.getItem('inventory')) || {
     "categories": ["Produce", "Meat", "Dairy"],
     "items": []
@@ -23,9 +39,10 @@ inventory.categories.forEach(category => {
 // Render items based on selected category
 const renderItems = (category) => {
     const itemList = document.getElementById('itemList');
-    itemList.innerHTML = ''; // Clear previous items
+    itemList.innerHTML = '';
 
     const items = JSON.parse(localStorage.getItem('inventory')).items;
+    // For filtering, https://www.w3schools.com/jsref/jsref_filter.asp was referenced
     const filteredItems = category === 'all' ? items : items.filter(item => item.category === category);
 
     filteredItems.forEach((item, index) => {
@@ -38,7 +55,7 @@ const renderItems = (category) => {
 // Initial render showing all items
 renderItems('all');
 
-// Filter button functionality
+// Filter
 document.getElementById('filterButton').addEventListener('click', () => {
     const selectedCategory = categoryDropdown.value;
     renderItems(selectedCategory);
@@ -53,14 +70,14 @@ const submitItemButton = document.getElementById('submitItemButton');
 const deleteItemButton = document.getElementById('deleteItemButton');
 let editIndex = null; // To track if editing an existing item
 
-// Add Item button functionality
+// Add Item
 document.getElementById('addItemButton').addEventListener('click', () => {
     popupTitle.textContent = 'Add Item';
-    submitItemButton.textContent = 'Add Item'; // Button text changes to "Add Item"
-    deleteItemButton.style.display = 'none'; // Hide delete button for adding
-    itemForm.reset(); // Clear previous form data
+    submitItemButton.textContent = 'Add Item';
+    deleteItemButton.style.display = 'none';
+    itemForm.reset();
     popup.style.display = 'flex';
-    editIndex = null; // This indicates we're adding, not editing
+    editIndex = null;
 });
 
 // Close popup
@@ -68,18 +85,18 @@ closePopup.addEventListener('click', () => {
     popup.style.display = 'none';
 });
 
-// Edit button functionality
+// Edit item
 document.getElementById('itemList').addEventListener('click', (e) => {
     if (e.target.classList.contains('edit-button')) {
         const index = e.target.dataset.index;
         const item = inventory.items[index];
         popupTitle.textContent = 'Edit Item';
-        submitItemButton.textContent = 'Edit Item'; // Button text changes to "Edit Item"
+        submitItemButton.textContent = 'Edit Item';
         document.getElementById('itemName').value = item.name;
         document.getElementById('itemQuantity').value = item.quantity;
         document.getElementById('itemCategory').value = item.category;
         popup.style.display = 'flex';
-        deleteItemButton.style.display = 'block'; // Show delete button for editing
+        deleteItemButton.style.display = 'block';
         editIndex = index; // Set index for editing
     }
 });
@@ -105,16 +122,15 @@ itemForm.addEventListener('submit', (e) => {
     // Save updated inventory to localStorage and re-render
     localStorage.setItem('inventory', JSON.stringify(inventory));
     renderItems(categoryDropdown.value);
-    popup.style.display = 'none'; // Close popup
+    popup.style.display = 'none';
 });
 
-// Delete item functionality
+// Delete item
 deleteItemButton.addEventListener('click', () => {
     if (editIndex !== null) {
-        // Remove the item from the inventory
         inventory.items.splice(editIndex, 1);
         localStorage.setItem('inventory', JSON.stringify(inventory));
         renderItems(categoryDropdown.value);
-        popup.style.display = 'none'; // Close popup
+        popup.style.display = 'none';
     }
 });

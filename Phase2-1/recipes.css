@@ -1,0 +1,22 @@
+.device{ 
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 0px;
+    font-size: 55px;
+    font-family: Arial, sans-serif;
+}
+
+p {
+    padding-left: 10px;
+    font-size: 40px;
+    font-family: Arial, sans-serif;
+
+}
+
+input {
+    font-size: 40px;
+}

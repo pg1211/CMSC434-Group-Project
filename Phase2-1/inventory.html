@@ -8,26 +8,20 @@
 
 <body>
   <div class="device">
-
-    <!-- Region dropdown -->
-    <div class="region-dropdown">
-      <select id="region-select">
-        <option value="fridge">Fridge</option>
-        <!-- More regions as needed -->
-        <option value="add-region">Add region...</option>
-      </select>
-    </div>
-
-    <!-- Popout for adding a new region -->
-    <div id="add-region-popup" class="popup">
-      <div class="popup-content">
-        <label for="new-region-name">New Region Name:</label>
-        <input type="text" id="new-region-name" placeholder="Enter region name">
-        <div class="popup-buttons">
-          <button id="add-region-btn">Add</button>
-          <button id="cancel-region-btn">Cancel</button>
-        </div>
+    <header class="header-bar">
+      <div class="filter-section">
+        <select id="categoryDropdown">
+          <option value="all">All categories</option>
+        </select>
+        <button id="filterButton">Filter</button>
       </div>
+      <button class="header-button" id="addItemButton">Add Item</button>
+    </header>
+
+    <div class="inventory-list">
+      <ul id="itemList">
+        <!-- Filtered items will be shown here -->
+      </ul>
     </div>
 
     <!-- NAVBAR -->
@@ -36,6 +30,31 @@
       <a href="shopping-lists.html">Shopping</a>
       <a href="recipes.html">Recipes</a>
       <a href="profile.html">Profiles</a>
+    </div>
+
+    <!-- Popup for Add/Edit Item -->
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <span class="close">&times;</span>
+        <h2 id="popupTitle">Add Item</h2>
+        <form id="itemForm">
+          <label for="itemName">Name:</label>
+          <input type="text" id="itemName" name="name" required>
+
+          <label for="itemQuantity">Quantity:</label>
+          <input type="number" id="itemQuantity" name="quantity" required>
+
+          <label for="itemCategory">Category:</label>
+          <select id="itemCategory" name="category" required>
+            <!-- Categories will be dynamically loaded -->
+          </select>
+
+          <button type="submit" id="submitItemButton">Add Item</button>
+        </form>
+
+        <!-- Delete button only for editing -->
+        <button id="deleteItemButton" style="display: none;">Delete Item</button>
+      </div>
     </div>
   </div>
 

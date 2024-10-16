@@ -86,6 +86,10 @@ h2 {
 .recipe b{
     margin-left: 100px;
 }
+.allbutnav{
+    display:flex;
+    flex-direction: column;
+}
 .backcontainer{
     display: flex;
     flex-direction: column;

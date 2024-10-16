@@ -9,7 +9,10 @@ body {
     background-color: #f4f4f4;
     padding: 20px;
 }
-
+.allbutnav{
+    display:flex;
+    flex-direction: column;
+}
 .container {
     display: flex;
     max-width: 600px;

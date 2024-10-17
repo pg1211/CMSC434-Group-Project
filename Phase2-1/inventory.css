@@ -2,16 +2,16 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: rgb(5, 185, 185);
-    /* I think change these colors to be closer to #005c8a */
+    background-color: #005c8a;
     padding: 20px;
     color: white;
 }
 
+/* Left side of the header */
 .filter-section {
     display: flex;
-    align-items: center; /* Ensure items in this section are centered */
-    height: 100%; /* Allow the filter section to take the height of the header bar */
+    align-items: center;
+    height: 100%;
 }
 
 /* I'm losing my mind. This is to try to line up the dropdown, filter, and add item button */
@@ -30,6 +30,11 @@ select {
     border: none;
     height: 40px;
     margin-bottom: 5px;
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
 }
 
 button {
@@ -42,7 +47,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    height: 40px; /* Ensure button height matches */
+    height: 40px;
 }
 
 button:hover {
@@ -53,7 +58,8 @@ button:hover {
     padding: 20px;
     flex-grow: 1;
     overflow-y: auto;
-    padding-bottom: 120px;
+    padding-bottom: 105px;
+    /* Padding at bottom causes menu bottom to move up! :D thank god! */
 }
 
 ul {
@@ -73,7 +79,7 @@ li {
 }
 
 .edit-button {
-    background-color: rgb(5, 185, 185);
+    background-color: #005c8a;
     color: white;
     padding: 10px;
     border: none;
@@ -82,7 +88,7 @@ li {
 }
 
 .edit-button:hover {
-    background-color: rgb(4, 150, 150);
+    background-color: #004669;
 }
 
 .popup {
@@ -134,8 +140,7 @@ label {
     margin-top: 10px;
 }
 
-input,
-select {
+input {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
@@ -143,17 +148,25 @@ select {
     border: 1px solid #ccc;
 }
 
-button[type="submit"] {
+#itemCategory {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#submitItemButton {
     margin-top: 15px;
     width: 100%;
     padding: 10px;
-    background-color: rgb(5, 185, 185);
+    background-color: #005c8a;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-button[type="submit"]:hover {
-    background-color: rgb(4, 150, 150);
+#submitItemButton:hover {
+    background-color: #004669;
 }

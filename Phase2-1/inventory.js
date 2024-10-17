@@ -1,12 +1,39 @@
-const inventory = JSON.parse(localStorage.getItem('inventory')) || {
-    "categories": ["Produce", "Meat", "Dairy"],
-    "items": []
-};
+/***
+ * Needed a lot of help for this one. :3
+ * General idea is that all data is stored in localStorage with inventory being the key, and the 
+ * value being stored is stringified JSON, which can then be parsed out when needed.
+ * I've attached my sources for general topics referenced below.
+ * Any more specific cases I've referenced are above where they are used.
+ * 
+ * localStorage
+ * https://www.w3schools.com/jsref/prop_win_localstorage.asp
+ * 
+ * Stringifying
+ * https://www.w3schools.com/js/js_json_stringify.asp
+ * 
+ * HTML DOM Manipulation
+ * https://www.w3schools.com/js/js_htmldom_methods.asp
+ * 
+ * Inner HTML
+ * https://www.w3schools.com/jsref/prop_html_innerhtml.asp
+ * 
+ * Event listener
+ * https://www.w3schools.com/js/js_htmldom_eventlistener.asp
+ */
 
-// Save inventory to localStorage if not already saved
+// Setting inventory to the current existing mapping or creating a new empty inventory if does not exist
+const inventory = JSON.parse(localStorage.getItem('inventory'));
+if (inventory == null) {
+    inventory = {
+        "categories": ["Produce", "Meat", "Dairy"],
+        "items": []
+    };
+}
+
+// Save inventory to localStorage
 localStorage.setItem('inventory', JSON.stringify(inventory));
 
-// Load categories into the dropdown
+// Load categories into the dropdown for the filter section and the edit/add popups
 const categoryDropdown = document.getElementById('categoryDropdown');
 const itemCategory = document.getElementById('itemCategory');
 inventory.categories.forEach(category => {
@@ -15,7 +42,8 @@ inventory.categories.forEach(category => {
     option.textContent = category;
     categoryDropdown.appendChild(option);
 
-    // Load categories in the popup form as well
+    // Load categories in the popup form as well.
+    // For cloneNode, https://www.w3schools.com/jsref/met_node_clonenode.asp was referenced
     let categoryOption = option.cloneNode(true);
     itemCategory.appendChild(categoryOption);
 });
@@ -23,10 +51,15 @@ inventory.categories.forEach(category => {
 // Render items based on selected category
 const renderItems = (category) => {
     const itemList = document.getElementById('itemList');
-    itemList.innerHTML = ''; // Clear previous items
+    itemList.innerHTML = '';
 
     const items = JSON.parse(localStorage.getItem('inventory')).items;
-    const filteredItems = category === 'all' ? items : items.filter(item => item.category === category);
+    // For filtering, https://www.w3schools.com/jsref/jsref_filter.asp was referenced
+    if (category == 'all') {
+        filteredItems = items;
+    } else {
+        filteredItems = items.filter(item => item.category == category)
+    }
 
     filteredItems.forEach((item, index) => {
         const li = document.createElement('li');
@@ -35,10 +68,10 @@ const renderItems = (category) => {
     });
 };
 
-// Initial render showing all items
+// Initial render with All categories
 renderItems('all');
 
-// Filter button functionality
+// Re-render the page with the selected filter option
 document.getElementById('filterButton').addEventListener('click', () => {
     const selectedCategory = categoryDropdown.value;
     renderItems(selectedCategory);
@@ -53,14 +86,14 @@ const submitItemButton = document.getElementById('submitItemButton');
 const deleteItemButton = document.getElementById('deleteItemButton');
 let editIndex = null; // To track if editing an existing item
 
-// Add Item button functionality
+// Add Item
 document.getElementById('addItemButton').addEventListener('click', () => {
     popupTitle.textContent = 'Add Item';
-    submitItemButton.textContent = 'Add Item'; // Button text changes to "Add Item"
-    deleteItemButton.style.display = 'none'; // Hide delete button for adding
-    itemForm.reset(); // Clear previous form data
+    submitItemButton.textContent = 'Add Item';
+    deleteItemButton.style.display = 'none';
+    itemForm.reset();
     popup.style.display = 'flex';
-    editIndex = null; // This indicates we're adding, not editing
+    editIndex = null;
 });
 
 // Close popup
@@ -68,18 +101,18 @@ closePopup.addEventListener('click', () => {
     popup.style.display = 'none';
 });
 
-// Edit button functionality
+// Edit item
 document.getElementById('itemList').addEventListener('click', (e) => {
     if (e.target.classList.contains('edit-button')) {
         const index = e.target.dataset.index;
         const item = inventory.items[index];
         popupTitle.textContent = 'Edit Item';
-        submitItemButton.textContent = 'Edit Item'; // Button text changes to "Edit Item"
+        submitItemButton.textContent = 'Edit Item';
         document.getElementById('itemName').value = item.name;
         document.getElementById('itemQuantity').value = item.quantity;
         document.getElementById('itemCategory').value = item.category;
         popup.style.display = 'flex';
-        deleteItemButton.style.display = 'block'; // Show delete button for editing
+        deleteItemButton.style.display = 'block';
         editIndex = index; // Set index for editing
     }
 });
@@ -105,16 +138,16 @@ itemForm.addEventListener('submit', (e) => {
     // Save updated inventory to localStorage and re-render
     localStorage.setItem('inventory', JSON.stringify(inventory));
     renderItems(categoryDropdown.value);
-    popup.style.display = 'none'; // Close popup
+    popup.style.display = 'none';
 });
 
-// Delete item functionality
+// Delete item
 deleteItemButton.addEventListener('click', () => {
     if (editIndex !== null) {
-        // Remove the item from the inventory
+        // For splicing, https://www.w3schools.com/jsref/jsref_splice.asp was referenced
         inventory.items.splice(editIndex, 1);
         localStorage.setItem('inventory', JSON.stringify(inventory));
         renderItems(categoryDropdown.value);
-        popup.style.display = 'none'; // Close popup
+        popup.style.display = 'none';
     }
 });

@@ -8,6 +8,7 @@
 
 <body>
   <div class="device">
+    <!-- Header -->
     <header class="header-bar">
       <div class="filter-section">
         <select id="categoryDropdown">
@@ -18,13 +19,13 @@
       <button class="header-button" id="addItemButton">Add Item</button>
     </header>
 
+    <!-- Inventory list -->
     <div class="inventory-list">
       <ul id="itemList">
-        <!-- Filtered items will be shown here -->
       </ul>
     </div>
 
-    <!-- NAVBAR -->
+    <!-- Navbar -->
     <div class="navbar">
       <a href="inventory.html" class="active">Inventory</a>
       <a href="shopping-lists.html">Shopping</a>
@@ -32,7 +33,7 @@
       <a href="profile.html">Profiles</a>
     </div>
 
-    <!-- Popup for Add/Edit Item -->
+    <!-- Popup for Add/Edit item -->
     <div id="popup" class="popup">
       <div class="popup-content">
         <span class="close">&times;</span>
@@ -46,7 +47,6 @@
 
           <label for="itemCategory">Category:</label>
           <select id="itemCategory" name="category" required>
-            <!-- Categories will be dynamically loaded -->
           </select>
 
           <button type="submit" id="submitItemButton">Add Item</button>

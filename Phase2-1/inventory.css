@@ -5,6 +5,7 @@
     background-color: #005c8a;
     padding: 20px;
     color: white;
+    border-bottom: 5px solid rgba(0, 0, 0, 0.1);
 }
 
 /* Left side of the header */
@@ -33,8 +34,6 @@ select {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
-    border-radius: 5px;
-    border: none;
 }
 
 button {
@@ -55,7 +54,7 @@ button:hover {
 }
 
 .inventory-list {
-    padding: 20px;
+    padding: 0px 20px;
     flex-grow: 1;
     overflow-y: auto;
     padding-bottom: 105px;
@@ -68,27 +67,72 @@ ul {
 }
 
 li {
-    background-color: #e0e0e0;
     color: black;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    font-size: 25px;
+    border-bottom: 3px solid rgba(76, 76, 76, 0.164);
+    padding: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.edit-button {
-    background-color: #005c8a;
-    color: white;
-    padding: 10px;
+.item-quantity {
+    font-size: 14px;
+    margin-right: 0px;
+    color: gray;
+}
+
+.item-unit {
+    font-size: 14px;
+    margin-left: 0px;
+    color: gray;
+}
+
+.item-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.plus-button {
+    background-color: #9cff79;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
     border: none;
-    border-radius: 5px;
+    border-radius: 40px;
+    padding: 5px 12px;
     cursor: pointer;
 }
 
-.edit-button:hover {
-    background-color: #004669;
+.plus-button:hover {
+    background-color: #8ae369;
+}
+
+.minus-button {
+    background-color: #f3ff74;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    border: none;
+    border-radius: 40px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.minus-button:hover {
+    background-color: #d5df64;
+}
+
+.delete-button {
+    background-color: #ff6767;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #de5a5a;
 }
 
 .popup {
@@ -112,19 +156,39 @@ li {
     position: relative;
 }
 
-button#deleteItemButton {
-    margin-top: 10px;
+/* Now these dont look the same. CSS is the bane of my existence. */
+#itemName {
+    display: block;
     width: 100%;
     padding: 10px;
-    background-color: red;
-    color: white;
-    border: none;
+    font-size: 16px;
     border-radius: 5px;
-    cursor: pointer;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-button#deleteItemButton:hover {
-    background-color: darkred;
+#itemQuantity {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* I don't know why, but the unit dropdown is not getting the same style as all the others in the popup :( */
+#itemUnit {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .close {
@@ -158,6 +222,7 @@ input {
 
 #submitItemButton {
     margin-top: 15px;
+    margin-left: 0px;
     width: 100%;
     padding: 10px;
     background-color: #005c8a;

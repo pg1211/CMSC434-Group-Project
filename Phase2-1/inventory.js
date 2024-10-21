@@ -36,13 +36,13 @@ localStorage.setItem('inventory', JSON.stringify(inventory));
 // Load categories into the dropdown for the filter section and the edit/add popups
 const categoryDropdown = document.getElementById('categoryDropdown');
 const itemCategory = document.getElementById('itemCategory');
-inventory.categories.forEach(category => {
+const categories = inventory.categories;
+categories.forEach(category => {
     let option = document.createElement('option');
     option.value = category;
     option.textContent = category;
     categoryDropdown.appendChild(option);
 
-    // Load categories in the popup form as well.
     // For cloneNode, https://www.w3schools.com/jsref/met_node_clonenode.asp was referenced
     let categoryOption = option.cloneNode(true);
     itemCategory.appendChild(categoryOption);
@@ -53,7 +53,7 @@ const renderItems = (category) => {
     const itemList = document.getElementById('itemList');
     itemList.innerHTML = '';
 
-    const items = JSON.parse(localStorage.getItem('inventory')).items;
+    const items = inventory.items;
     // For filtering, https://www.w3schools.com/jsref/jsref_filter.asp was referenced
     if (category == 'all') {
         filteredItems = items;
@@ -63,7 +63,34 @@ const renderItems = (category) => {
 
     filteredItems.forEach((item, index) => {
         const li = document.createElement('li');
-        li.innerHTML = `${item.name} (Quantity: ${item.quantity}) <button class="edit-button" data-index="${index}">Edit</button>`;
+        // I've changed the innerHTML here for the 3 buttons instead of just the edit screen, as well as adding units.
+        // Unfortunately, have to check units for format, as if "unit" = none, then no unit should be shown
+        // I know what looks below seems psychotic, but &nbsp helps to ensure that spacing stays consistent
+        if (item.unit == "none") {
+            li.innerHTML = `
+            <div class="number-section">
+                <span class="item-quantity">${item.quantity}</span>
+                <span class="item-unit">&nbsp&nbsp&nbsp&nbsp</span>
+            </div>
+            ${item.name}
+            <div class="item-buttons">
+                <button class="plus-button" data-index="${index}">+</button>
+                <button class="minus-button" data-index="${index}">-</button>
+                <button class="delete-button" data-index="${index}">Delete</button>
+            </div>`;
+        } else {
+            li.innerHTML = `
+            <div class="number-section">
+                <span class="item-quantity">${item.quantity}</span>
+                <span class="item-unit">${item.unit}</span>
+            </div>
+            ${item.name}
+            <div class="item-buttons">
+                <button class="plus-button" data-index="${index}">+</button>
+                <button class="minus-button" data-index="${index}">-</button>
+                <button class="delete-button" data-index="${index}">Delete</button>
+            </div>`;
+        }
         itemList.appendChild(li);
     });
 };
@@ -101,20 +128,26 @@ closePopup.addEventListener('click', () => {
     popup.style.display = 'none';
 });
 
-// Edit item
+// Plus, Minus, and Trash button functionality
 document.getElementById('itemList').addEventListener('click', (e) => {
-    if (e.target.classList.contains('edit-button')) {
-        const index = e.target.dataset.index;
-        const item = inventory.items[index];
-        popupTitle.textContent = 'Edit Item';
-        submitItemButton.textContent = 'Edit Item';
-        document.getElementById('itemName').value = item.name;
-        document.getElementById('itemQuantity').value = item.quantity;
-        document.getElementById('itemCategory').value = item.category;
-        popup.style.display = 'flex';
-        deleteItemButton.style.display = 'block';
-        editIndex = index; // Set index for editing
+    const index = e.target.dataset.index;
+
+    if (e.target.classList.contains('plus-button')) {
+        inventory.items[index].quantity += 1;
+    } else if (e.target.classList.contains('minus-button')) {
+        if (inventory.items[index].quantity > 1) {
+            inventory.items[index].quantity -= 1;
+        } else {
+            // If '-' is ever used when quantity = 1, then item gets removed! :3
+            inventory.items.splice(index, 1);
+        }
+    } else if (e.target.classList.contains('delete-button')) {
+        inventory.items.splice(index, 1);
     }
+
+    // Update localStorage and re-render items
+    localStorage.setItem('inventory', JSON.stringify(inventory));
+    renderItems(categoryDropdown.value);
 });
 
 // Add/Edit item form submission
@@ -124,6 +157,7 @@ itemForm.addEventListener('submit', (e) => {
     const newItem = {
         name: document.getElementById('itemName').value,
         quantity: parseInt(document.getElementById('itemQuantity').value),
+        unit: document.getElementById('itemUnit').value,
         category: document.getElementById('itemCategory').value
     };
 

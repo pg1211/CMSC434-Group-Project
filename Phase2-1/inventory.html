@@ -33,7 +33,7 @@
       <a href="profile.html">Profiles</a>
     </div>
 
-    <!-- Popup for Add/Edit item -->
+    <!-- Popup for Add item -->
     <div id="popup" class="popup">
       <div class="popup-content">
         <span class="close">&times;</span>
@@ -58,9 +58,12 @@
           <button type="submit" id="submitItemButton">Add Item</button>
         </form>
 
+        <!-- I added this here when popup would be used for both adding and editing, but now editing isn't a thing -->
+        <!-- However, if I remove it, everything breaks. So I've just made it not display. I miss react. -->
         <!-- Delete button only for editing -->
         <button id="deleteItemButton" style="display: none;">Delete Item</button>
       </div>
+      <img src="local-resources/keyboard.jpg" alt="SoftKeyboard" class="keyboardImg" />
     </div>
   </div>
 

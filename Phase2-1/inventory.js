@@ -21,16 +21,26 @@
  * https://www.w3schools.com/js/js_htmldom_eventlistener.asp
  */
 
-// Setting inventory to the current existing mapping or creating a new empty inventory if does not exist
+// IF WANT TO SWITCH DEFAULT VALUES, NEED TO SWITCH TO THIS FOR 1 RUN:
+/* 
+    localStorage.clear();
+
+    const inventory = {
+        "categories": ["Produce", "Meat", "Dairy", "Grains"],
+        "items": []
+    };
+
+    localStorage.setItem('inventory', JSON.stringify(inventory));
+*/
 const inventory = JSON.parse(localStorage.getItem('inventory'));
+
 if (inventory == null) {
     inventory = {
-        "categories": ["Produce", "Meat", "Dairy"],
+        "categories": ["Produce", "Meat", "Dairy", "Grains"],
         "items": []
     };
 }
 
-// Save inventory to localStorage
 localStorage.setItem('inventory', JSON.stringify(inventory));
 
 // Load categories into the dropdown for the filter section and the edit/add popups
@@ -76,7 +86,9 @@ const renderItems = (category) => {
             <div class="item-buttons">
                 <button class="plus-button" data-index="${index}">+</button>
                 <button class="minus-button" data-index="${index}">-</button>
-                <button class="delete-button" data-index="${index}">Delete</button>
+                <button class="delete-button" data-index="${index}">
+                    <img class="delete-icon" src="local-resources/trash-can-regular.png" alt="DeleteIcon" />
+                </button>
             </div>`;
         } else {
             li.innerHTML = `
@@ -88,7 +100,9 @@ const renderItems = (category) => {
             <div class="item-buttons">
                 <button class="plus-button" data-index="${index}">+</button>
                 <button class="minus-button" data-index="${index}">-</button>
-                <button class="delete-button" data-index="${index}">Delete</button>
+                <button class="delete-button" data-index="${index}">
+                    <img class="delete-icon" src="local-resources/trash-can-regular.png" alt="DeleteIcon" />
+                </button>
             </div>`;
         }
         itemList.appendChild(li);

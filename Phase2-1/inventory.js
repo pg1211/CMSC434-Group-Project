@@ -22,12 +22,110 @@
  */
 
 // I had a field day determining that removing const was the only thing I needed to make this work for all edge cases.
+// use localStorage.clear(); if want to get a clean inventory slate
 inventory = JSON.parse(localStorage.getItem('inventory'));
 
 if (inventory == null) {
     inventory = {
         "categories": ["Produce", "Meat", "Dairy", "Grains"],
-        "items": []
+        "items": [
+            {
+                "name": "Apple",
+                "quantity": 6,
+                "unit": "none",
+                "category": "Produce"
+            },
+            {
+                "name": "Chicken",
+                "quantity": 12,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Yogurt",
+                "quantity": 20,
+                "unit": "oz",
+                "category": "Dairy"
+            },
+            {
+                "name": "Bread",
+                "quantity": 3,
+                "unit": "none",
+                "category": "Grains"
+            },
+            {
+                "name": "Pear",
+                "quantity": 3,
+                "unit": "none",
+                "category": "Produce"
+            },
+            {
+                "name": "Cabbage",
+                "quantity": 32,
+                "unit": "oz",
+                "category": "Produce"
+            },
+            {
+                "name": "Soup",
+                "quantity": 16,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Donut",
+                "quantity": 12,
+                "unit": "none",
+                "category": "Grains"
+            },
+            {
+                "name": "Spinach",
+                "quantity": 32,
+                "unit": "none",
+                "category": "Produce"
+            },
+            {
+                "name": "Asparagus",
+                "quantity": 8,
+                "unit": "none",
+                "category": "Produce"
+            },
+            {
+                "name": "Nuggets",
+                "quantity": 32,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Mashed potatoes",
+                "quantity": 17,
+                "unit": "oz",
+                "category": "Produce"
+            },
+            {
+                "name": "Oreos",
+                "quantity": 14,
+                "unit": "none",
+                "category": "Grains"
+            },
+            {
+                "name": "Steak",
+                "quantity": 16,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Meatloaf",
+                "quantity": 26,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Banana",
+                "quantity": 12,
+                "unit": "none",
+                "category": "Produce"
+            }
+        ]
     };
 }
 

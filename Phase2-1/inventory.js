@@ -21,18 +21,8 @@
  * https://www.w3schools.com/js/js_htmldom_eventlistener.asp
  */
 
-// IF WANT TO SWITCH DEFAULT VALUES, NEED TO SWITCH TO THIS FOR 1 RUN:
-/* 
-    localStorage.clear();
-
-    const inventory = {
-        "categories": ["Produce", "Meat", "Dairy", "Grains"],
-        "items": []
-    };
-
-    localStorage.setItem('inventory', JSON.stringify(inventory));
-*/
-const inventory = JSON.parse(localStorage.getItem('inventory'));
+// I had a field day determining that removing const was the only thing I needed to make this work for all edge cases.
+inventory = JSON.parse(localStorage.getItem('inventory'));
 
 if (inventory == null) {
     inventory = {
@@ -44,9 +34,9 @@ if (inventory == null) {
 localStorage.setItem('inventory', JSON.stringify(inventory));
 
 // Load categories into the dropdown for the filter section and the edit/add popups
-const categoryDropdown = document.getElementById('categoryDropdown');
-const itemCategory = document.getElementById('itemCategory');
-const categories = inventory.categories;
+categoryDropdown = document.getElementById('categoryDropdown');
+itemCategory = document.getElementById('itemCategory');
+categories = inventory.categories;
 categories.forEach(category => {
     let option = document.createElement('option');
     option.value = category;
@@ -59,11 +49,11 @@ categories.forEach(category => {
 });
 
 // Render items based on selected category
-const renderItems = (category) => {
-    const itemList = document.getElementById('itemList');
+renderItems = (category) => {
+    itemList = document.getElementById('itemList');
     itemList.innerHTML = '';
 
-    const items = inventory.items;
+    items = inventory.items;
     // For filtering, https://www.w3schools.com/jsref/jsref_filter.asp was referenced
     if (category == 'all') {
         filteredItems = items;
@@ -72,7 +62,7 @@ const renderItems = (category) => {
     }
 
     filteredItems.forEach((item, index) => {
-        const li = document.createElement('li');
+        li = document.createElement('li');
         // I've changed the innerHTML here for the 3 buttons instead of just the edit screen, as well as adding units.
         // Unfortunately, have to check units for format, as if "unit" = none, then no unit should be shown
         // I know what looks below seems psychotic, but &nbsp helps to ensure that spacing stays consistent
@@ -114,17 +104,16 @@ renderItems('all');
 
 // Re-render the page with the selected filter option
 document.getElementById('filterButton').addEventListener('click', () => {
-    const selectedCategory = categoryDropdown.value;
+    selectedCategory = categoryDropdown.value;
     renderItems(selectedCategory);
 });
 
 // Popup for Add/Edit item
-const popup = document.getElementById('popup');
-const closePopup = document.querySelector('.close');
-const popupTitle = document.getElementById('popupTitle');
-const itemForm = document.getElementById('itemForm');
-const submitItemButton = document.getElementById('submitItemButton');
-const deleteItemButton = document.getElementById('deleteItemButton');
+popup = document.getElementById('popup');
+closePopup = document.querySelector('.close');
+popupTitle = document.getElementById('popupTitle');
+submitItemButton = document.getElementById('submitItemButton');
+deleteItemButton = document.getElementById('deleteItemButton');
 let editIndex = null; // To track if editing an existing item
 
 // Add Item
@@ -144,7 +133,7 @@ closePopup.addEventListener('click', () => {
 
 // Plus, Minus, and Trash button functionality
 document.getElementById('itemList').addEventListener('click', (e) => {
-    const index = e.target.dataset.index;
+    index = e.target.dataset.index;
 
     if (e.target.classList.contains('plus-button')) {
         inventory.items[index].quantity += 1;
@@ -168,7 +157,7 @@ document.getElementById('itemList').addEventListener('click', (e) => {
 itemForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const newItem = {
+    newItem = {
         name: document.getElementById('itemName').value,
         quantity: parseInt(document.getElementById('itemQuantity').value),
         unit: document.getElementById('itemUnit').value,

@@ -9,46 +9,50 @@
 <body>
   <div class="device">
 
-    
-    <form id="choice-form">
-    <h1>Recipes</h1>
-    <p id=form-prompt>Cooking for?</p>
-    <input type="radio" id="group" name="cooking_for" value="group">
-    <label for="group">Group</label><br>
-    <input type="radio" id="self2" name="cooking_for" value="self2">
-    <label for="self2">Self</label><br>
+    <header class="header-bar">
+      <div class="multipleSelection">
+          <div class="selectBox" onclick="showCheckboxes()">
+              <select>
+                  <option>Filters</option>
+              </select>
+              <div class="overSelect"></div>
+          </div>
+          <div id="checkBoxes">
+              <label for="fav">
+                  <input type="checkbox" id="fav" onchange="filterRecipes()" />
+                  Favorites only
+              </label>
+              <label for="inv">
+                  <input type="checkbox" id="inv" onchange="filterRecipes()" />
+                  Current inventory only
+              </label>
+              <label for="pos">
+                  <input type="checkbox" id="pos" onchange="filterRecipes()" />
+                  Positive reviews only
+              </label>
+          </div>
+      </div>
+  </header>
 
-<p id=form-prompt2>Filters:</p>
+  <div class="recipe-list" id="recipe-list"></div>
 
-    <input type="checkbox" id="inv" name="inv" value="inv">
-    <label for="inv"> Use Existing Inventory Only</label><br>
-    <input type="checkbox" id="favs" name="favs" value="favs">
-    <label for="favs"> Search Favorite Recipes Only</label><br>
-<br>
-    <input type="radio" id="any" name="stars" value="any" checked="checked">
-    <label for="any">Any Rating</label><br>
-    <input type="radio" id="one" name="stars" value="one">
-    <label for="one">1+ Stars</label><br>
-  <input type="radio" id="two2" name="stars" value="two2">
-    <label for="two2">2+ Stars</label><br>
-    <input type="radio" id="three" name="stars" value="three">
-    <label for="three">3+ Stars</label><br>
-    <input type="radio" id="four" name="stars" value="four">
-    <label for="four">4+ Stars</label><br>
-    <input type="radio" id="five" name="stars" value="five">
-    <label for="five">5 Stars</label><br>
-<br>
-<input type="submit" value="Next →">
-    </form>
-
-
-    <div class="navbar">
-      <a href="inventory.html">Inventory</a>
-      <a href="shopping-lists.html">Shopping</a>
-      <a href="recipes.html" class="active">Recipes</a>
-      <a href="profile.html">Profiles</a>
-    </div>
+  <!-- The Modal -->
+  <div id="recipeModal" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h3 id="modal-recipe-name"></h3>
+          <p id="modal-recipe-rating"></p>
+          <p id="modal-recipe-ingredients"></p>
+      </div>
   </div>
+
+<!-- Navbar -->
+<div class="navbar">
+  <a href="inventory.html" class="active">Inventory</a>
+  <a href="shopping-lists.html">Shopping</a>
+  <a href="recipes.html">Recipes</a>
+  <a href="profile.html">Profiles</a>
+</div>
 
   <script src="recipes.js"></script>
 </body>

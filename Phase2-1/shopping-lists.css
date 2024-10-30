@@ -10,6 +10,7 @@
 
 /* Left side of the header */
 .filter-section {
+  gap: 10px;
   display: flex;
   align-items: center;
   height: 100%;
@@ -19,6 +20,12 @@
 #filterButton {
   padding: 10px 15px;
 }
+
+#listDropdown {
+  width: 100px;
+}
+
+
 
 #addItemButton {
   height: 40px;
@@ -38,7 +45,6 @@ select {
 
 button {
   background-color: white;
-  margin-left: 5px;
   color: black;
   font-size: 18px;
   padding: 10px;

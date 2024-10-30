@@ -9,17 +9,21 @@
 <body>
   <div class="device">
 
-    <h1>Shopping Lists</h1>
+    <!-- Header -->
+    <header class="header-bar">
+      <div class="filter-section">
+        <select id="categoryDropdown">
+          <option value="all">All categories</option>
+        </select>
+        <button id="filterButton">Filter</button>
+      </div>
+      <button class="header-button" id="addItemButton">Add Item</button>
+    </header>
 
-    <!-- Shopping List Entry Form -->
-    <div class="list-container">
-      <form id="shopping-form">
-        <input type="text" id="item-input" placeholder="Add a shopping item" required>
-        <button type="submit">Add Item</button>
-      </form>
-      
-      <!-- Shopping List Display -->
-      <ul id="shopping-list"></ul>
+    <!-- Inventory list -->
+    <div class="inventory-list">
+      <ul id="itemList">
+      </ul>
     </div>
 
     <div class="navbar">
@@ -27,6 +31,39 @@
       <a href="shopping-lists.html" class="active">Shopping</a>
       <a href="recipes.html">Recipes</a>
       <a href="profile.html">Profiles</a>
+    </div>
+
+    <!-- Popup for Add item -->
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <span class="close">&times;</span>
+        <h2 id="popupTitle">Add Item</h2>
+        <form id="itemForm">
+          <label for="itemName">Name:</label>
+          <input type="text" id="itemName" name="name" required>
+
+          <label for="itemQuantity">Quantity:</label>
+          <input type="number" id="itemQuantity" name="quantity" required>
+
+          <label for="itemUnit">Unit of Measurement:</label>
+          <select id="itemUnit" name="unit" required>
+            <option value="none">None</option>
+            <option value="oz">oz</option>
+          </select>
+
+          <label for="itemCategory">Category:</label>
+          <select id="itemCategory" name="category" required>
+          </select>
+
+          <button type="submit" id="submitItemButton">Add Item</button>
+        </form>
+
+        <!-- I added this here when popup would be used for both adding and editing, but now editing isn't a thing -->
+        <!-- However, if I remove it, everything breaks. So I've just made it not display. I miss react. -->
+        <!-- Delete button only for editing -->
+        <button id="deleteItemButton" style="display: none;">Delete Item</button>
+      </div>
+      <img src="local-resources/keyboard.jpg" alt="SoftKeyboard" class="keyboardImg" />
     </div>
   </div>
 

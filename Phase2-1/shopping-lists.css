@@ -1,78 +1,254 @@
-.device {
-    background-color: white;
-    color: black; /* Ensures black text in body sections */
-  }
-  
-  .list-container {
-    padding: 20px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    overflow-y: scroll;
-    color: black; /* Black text for the form and list items */
-  }
-  
-  #shopping-form {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  #item-input {
-    width: 70%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid lightgrey;
-    border-radius: 4px;
-    color: black; /* Black text inside the input */
-    background-color: white; /* White background for the input */
-  }
-  
-  button {
-    width: 25%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #005c8a; /* Dark blue background for the button */
-    color: white; /* White text on the button */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #00496e; /* Darker shade for hover effect */
-  }
-  
-  #shopping-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  #shopping-list li {
-    padding: 10px;
-    font-size: 18px;
-    border-bottom: 1px solid lightgrey;
-  }
-  
-  #shopping-list li:last-child {
-    border-bottom: none;
-  }
-  
-  .navbar a {
-    text-decoration: none;
-    padding: 10px;
-    background-color: #005c8a; /* Dark blue background for navbar links */
-    color: white; /* White text for navbar links */
-    margin-right: 10px;
-    border-radius: 4px;
-  }
-  
-  .navbar a.active {
-    background-color: #00496e; /* Darker shade for active link */
-  }
-  
-  .navbar a:hover {
-    background-color: #00496e; /* Same shade on hover for consistency */
-  }
-  
+.header-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #005c8a;
+  padding: 20px;
+  color: white;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Left side of the header */
+.filter-section {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* I'm losing my mind. This is to try to line up the dropdown, filter, and add item button */
+#filterButton {
+  padding: 10px 15px;
+}
+
+#addItemButton {
+  height: 40px;
+}
+
+select {
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  height: 40px;
+  margin-bottom: 5px;
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+button {
+  background-color: white;
+  margin-left: 5px;
+  color: black;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  height: 40px;
+}
+
+button:hover {
+  background-color: #f0f0f0;
+}
+
+.inventory-list {
+  padding: 0px 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-bottom: 105px;
+  /* Padding at bottom causes menu bottom to move up! :D thank god! */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  color: black;
+  font-size: 25px;
+  border-bottom: 3px solid rgba(76, 76, 76, 0.164);
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-quantity {
+  font-size: 14px;
+  margin-right: 0px;
+  color: gray;
+}
+
+.item-unit {
+  font-size: 14px;
+  margin-left: 0px;
+  color: gray;
+}
+
+.item-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.plus-button {
+  background-color: #9cff79;
+  color: rgb(0, 0, 0);
+  font-size: 25px;
+  border: none;
+  border-radius: 40px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+.plus-button:hover {
+  background-color: #8ae369;
+}
+
+.minus-button {
+  background-color: #f3ff74;
+  color: rgb(0, 0, 0);
+  font-size: 25px;
+  border: none;
+  border-radius: 40px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.minus-button:hover {
+  background-color: #d5df64;
+}
+
+.delete-icon {
+  width: 20px;
+  height: 25px;
+  pointer-events: none; /* This might be the single stupidest line I have ever had the displeasure of writing, courtesy of event listeners. */
+}
+
+.delete-button {
+  background-color: #ff6767;
+  color: rgb(0, 0, 0);
+  font-size: 25px;
+  border: none;
+  border-radius: 40px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #de5a5a;
+}
+
+.popup {
+  display: none;
+  position: absolute;
+  top: -140;  /* done to make room for the soft keyboard */
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  position: relative;
+}
+
+/* for my itty bitty soft keyboard :3 */
+.keyboardImg {
+  position: absolute;
+  bottom: -140;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Now these dont look the same. CSS is the bane of my existence. */
+#itemName {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#itemQuantity {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* I don't know why, but the unit dropdown is not getting the same style as all the others in the popup :( */
+#itemUnit {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#itemCategory {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#submitItemButton {
+  margin-top: 15px;
+  margin-left: 0px;
+  width: 100%;
+  padding: 10px;
+  background-color: #005c8a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#submitItemButton:hover {
+  background-color: #004669;
+}

@@ -93,6 +93,28 @@ li {
   gap: 10px;
 }
 
+.inventory-button {
+  /* background-color: #9cff79; */
+  background-color: #6276EA;
+  align-items: center;
+  font-size: 25px;
+  border: none;
+  border-radius: 40px;
+  padding: 5px 12px;
+  cursor: pointer;
+  width: 40px;
+}
+
+.inventory-button:hover {
+  background-color: #7b8ce9;
+}
+
+.inventory-icon {
+  width: 20px;
+  height: 25px;
+  pointer-events: none; /* This might be the single stupidest line I have ever had the displeasure of writing, courtesy of event listeners. */
+}
+
 .plus-button {
   background-color: #9cff79;
   color: rgb(0, 0, 0);

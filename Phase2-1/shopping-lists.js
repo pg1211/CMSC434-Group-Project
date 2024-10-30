@@ -160,6 +160,9 @@ renderItems = (category) => {
             </div>
             ${item.name}
             <div class="item-buttons">
+                <button class="inventory-button" data-index="${index}">
+                    <img class="inventory-icon" src="local-resources/checkmark.png" alt="InvIcon">
+                </button>
                 <button class="plus-button" data-index="${index}">+</button>
                 <button class="minus-button" data-index="${index}">-</button>
                 <button class="delete-button" data-index="${index}">
@@ -174,6 +177,9 @@ renderItems = (category) => {
             </div>
             ${item.name}
             <div class="item-buttons">
+                <button class="inventory-button" data-index="${index}">
+                    <img class="inventory-icon" src="local-resources/checkmark.png" alt="InvIcon">
+                </button>
                 <button class="plus-button" data-index="${index}">+</button>
                 <button class="minus-button" data-index="${index}">-</button>
                 <button class="delete-button" data-index="${index}">
@@ -232,6 +238,15 @@ document.getElementById('itemList').addEventListener('click', (e) => {
         }
     } else if (e.target.classList.contains('delete-button')) {
         shopping.items.splice(index, 1);
+    } else if (e.target.classList.contains('inventory-button')) {
+      // remove item from shopping list and create temp
+      item = shopping.items.splice(index, 1);
+
+      // now, append it to the inventory list
+      inventory.items.push(item[0]);
+
+      // Save updated inventory to localStorage and re-render
+      localStorage.setItem('inventory', JSON.stringify(inventory));
     }
 
     // Update localStorage and re-render items

@@ -15,7 +15,7 @@ body {
     max-width: 600px;
     margin: 0 auto;
     background-color: #fff;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     justify-content: center;
@@ -35,6 +35,106 @@ body {
     display:flex;
     flex-direction: column;
 }
+
+.list-container {
+    display: none;
+    padding: 10px;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: start;
+    overflow-y: scroll;
+    color: black; /* Black text for the form and list items */
+  }
+  #dislike-popup{
+    display: none;
+    padding: 20px;
+    flex-grow: 1;
+    padding-left: 15%;
+    padding-right: 15%;
+    flex-direction: column;
+    justify-content: start;
+    overflow-y: hidden;
+    color: black; /* Black text for the form and list items */
+  }
+  #restrictions-popup{
+    display: none;
+    padding: 20px;
+    padding-left: 15%;
+    padding-right: 15%;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: start;
+    overflow-y: hidden;
+    color: black; /* Black text for the form and list items */
+  }
+  #cb-button{
+    cursor: "pointer";
+    
+  }
+  #cooking-baking-popup{
+    display: none;
+    padding: 20px;
+    flex-grow: 1;
+    flex-direction: column;
+    overflow-y: hidden;
+    color: black; /* Black text for the form and list items */
+  }
+  #fr-popup{
+    display: none;
+    padding: 20px;
+    padding-left: 15%;
+    padding-right: 15%;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: start;
+    overflow-y: hidden;
+    color: black; /* Black text for the form and list items */
+  }
+  #cooking-baking-popup h2{
+    font-size: 20px;
+  }
+  #cooking-baking-form{
+    align-items: center;
+    justify-content: center;
+  }
+  #cooking-baking-popup button{
+    max-width: 200px;
+    min-width: 120px;
+    text-align: center;
+  }
+  .cb-container{
+    display: "flex";
+    align-content: center;
+    justify-items: center;
+    
+  }
+  
+  #shopping-form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  #item-input {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+    color: black; /* Black text inside the input */
+    background-color: white; /* White background for the input */
+  }
+  
+  button {
+    width: 25%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #005c8a; /* Dark blue background for the button */
+    color: white; /* White text on the button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 .favorite-recipe-container {
     display: flex;
     max-width: 600px;
@@ -47,6 +147,7 @@ body {
     flex-direction: column;
 }
 .skill-container {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     max-width: 600px;
@@ -86,11 +187,9 @@ h1 {
 }
 
 h2 {
-    text-align: left;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-right: 100px;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
     font-size: 30px;
 }
 
@@ -139,7 +238,7 @@ form input[type="number"] {
 
 form button {
     padding: 8px 16px;
-    background-color: #28a745;
+    background-color: #005c8a;
     color: white;
     border: none;
     border-radius: 4px;
@@ -147,7 +246,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #218838;
+    background-color: #00496e;
 }
 
 

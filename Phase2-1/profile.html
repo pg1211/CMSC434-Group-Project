@@ -18,45 +18,66 @@
         <p>Age: 21</p>
       </div>
     </div>
-    <div class = "favorite-recipe-container">
-    <h2>Favorite Recipes →</h2>
-    <div class="container-recipes">
-    <div class = "recipe-item">
-      <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
-      <p>Fried Chicken</p>
+    
+    <div class = "link-container" id= "favorite-recipes">
+      <h2>Favorite Recipes →</h2>
     </div>
-    <div class = "recipe-item">
-      <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
-      <p>Stromboli</p>
-    </div>
-    <div class = "recipe-item">
-      <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
-      <p>Spaghetti</p>
+    <div class="list-container" id = "fr-popup" onclick = "myFunctionFr()">
+      <form id="fr-form">
+        <input type="text" id="fr-input" placeholder="Add a Recipe" required>
+        <button type="submit">Add Recipe</button>
+      </form>
+      
+      <!-- Shopping List Display -->
+      <ul id="fr-list"></ul>
     </div>
 
-    <div class = "recipe-item">
-      <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
-      <p>Cheddar Mac</p>
-    </div>
-    <div class = "recipe-item">
-      <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
-      <p>Apple Pie</p>
-    </div>
+  <div class = "link-container" id= "restrictions">
+    <h2>Dietary Restrictions →</h2>
+  </div>
+  <div class="list-container" id = "restrictions-popup" onclick = "myFunctionRestrictions()">
+    <form id="restrictions-form">
+      <input type="text" id="restrictions-input" placeholder="Add a restriction" required>
+      <button type="submit">Add Restriction</button>
+    </form>
+    
+    <!-- Shopping List Display -->
+    <ul id="restrictions-list"></ul>
+  </div>
+
+  <div class = "link-container" id="dislikes">
+    <h2 >Dislikes →</h2>
+  </div>
+
+
+  <div class="list-container" id = "dislike-popup" onclick = "myFunction()">
+    <form id="dislike-form">
+      <input type="text" id="dislike-input" placeholder="Add a dislike" required>
+      <button type="submit">Add Dislike</button>
+    </form>
+    
+    <!-- Shopping List Display -->
+    <ul id="dislike-list"></ul>
+  </div>
+
+  <div class = "skill-container" id = "cb-button" onclick = "myFunctionCB()">
+    <h2 id = "cooking-level"> Cooking Level: Beginner</h2>
+    <h2 id = "baking-level">Baking Level: Beginner</h2>
+  </div>
+  <div class="list-container" id = "cooking-baking-popup" >
+    <form id="cooking-baking-form">
+      <div class ="cb-container">
+        <h2>Cooking</h2>
+        <button type ="button" id ="cooking-beginner-button">Beginner</button>
+        <button type="button" id ="cooking-inter-button">Intermediate</button>
+        <button type= "button" id = "cooking-advanced-button">Advanced</button>
+        <h2>Baking</h2>
+        <button type="button" id ="baking-beginner-button">Beginner</button>
+        <button type="button" id ="baking-inter-button">Intermediate</button>
+        <button type="button" id ="baking-advanced-button">Advanced</button>
       </div>
 
-    </div>
-
-  <div class = "link-container">
-    <h2>Dietary Restrictions: Gluten</h2>
-  </div>
-  <div class = "link-container">
-    <h2>Dislikes →</h2>
-  </div>
-
-  <div class = "skill-container">
-    <h2>Cooking Level: Beginner</h2>
-    <h2>Baking Level: Beginner</h2>
-  </div>
+    </form>
   
 
   </div>
@@ -68,6 +89,7 @@
     <a href="recipes.html" >Recipes</a>
     <a href="profile.html"class="active">Profiles</a>
   </div>
+
 </div>
 
 

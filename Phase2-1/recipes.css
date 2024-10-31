@@ -43,6 +43,7 @@ input {
 #checkBoxes {
     display: none;
     border: 1px black solid;
+    width: 358px;
 }
 
 #checkBoxes label {
@@ -72,25 +73,39 @@ select {
     font-weight: lighter;
 }
 
-/*recipe list stuff ***WHY IS THERE A GAP!?*** */
+/*recipe list stuff*/
 
 .recipe-list { 
     background-color: white; 
     padding: 20px; 
-    max-height: 400px; /* Set a max-height */
-    overflow-y: auto;  /* Make it scrollable */
-    border: 1px solid #ccc;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid lightgrey;
     padding-bottom: 460px;
     /* this is to move up the list above navbar */
 }
 .recipe { 
-    border: 1px solid #ccc; 
+    border: 1px solid lightgrey; 
     margin: 10px 0; 
     padding: 10px; 
-    cursor: pointer; 
+    cursor: default; 
 }
 
-/* Modal styles */
+.recipe button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 1px solid lightgrey;
+    background-color: white;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.recipe button:hover {
+    background-color: lightgrey;
+}
+
+/*popup stuff*/
 .modal {
     display: none; 
     position: fixed;
@@ -103,34 +118,36 @@ select {
     background-color: rgba(0, 0, 0, 0.4);
 }
 .modal-content {
-    background-color: #fff;
+    background-color: white;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid lightgrey;
     width: 80%;
     max-width: 500px;
 }
-.close {
-    color: #aaa;
+.closeButton {
+    color: grey;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
-.close:hover,
-.close:focus {
-    color: #000;
+.closeButton:hover,
+.closeButton:focus {
+    color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
-/* Filter dropdown styles */
-.multipleSelection {
-    position: relative;
+.stars {
+    font-size: 30px;
+    color: gold;
 }
+
 #checkBoxes {
     display: none;
-    border: 1px solid #ccc;
-    background: #fff;
+    border: 1px solid lightgrey;
+    background: white;
     position: absolute;
     z-index: 1;
 }
+

@@ -1,178 +1,151 @@
 document.addEventListener("DOMContentLoaded", function () {
-    //dislikes
-    const form = document.getElementById("dislike-form");
-    const input = document.getElementById("dislike-input");
-    const list = document.getElementById("dislike-list");
+    //JSON business
+
+    profile = JSON.parse(localStorage.getItem('profile'));
+    if (profile == null){
+        profile = {
+            "First Name" : "Jaques",
+            "Last Name" : "Webster",
+            "Age" : 20, 
+            "Dislikes" : "Pineappple",
+            "Cooking Level" : "Beginner",
+            "Baking Level" : "Advanced",
+            "Restrictions" : ["Gluten Free, Vegan"]
+        };
+    }
+    localStorage.setItem('profile', JSON.stringify(profile));
+
+    //Information in page
+    const firstname = document.getElementById("firstname");
+    const lastname = document.getElementById("lastname");
+
+    //Set values from json
+    firstname.textContent = profile["First Name"];
+    lastname.textContent = profile["Last Name"];
+
+    const age = document.getElementById("age");
+    age.textContent = "Age: " + profile["Age"];
+    const dislikes = document.getElementById("dislikes-text");
+    dislikes.textContent = profile["Dislikes"];
+    const cookingLevel = document.getElementById("cooking-level");
+    const bakingLevel = document.getElementById("baking-level");
+    cookingLevel.textContent = "Cooking Level: " + profile["Cooking Level"];
+    bakingLevel.textContent = "Baking Level: " + profile["Baking Level"];
+    const restrictions = document.getElementById("restrictions-text");
+
+    string = "";
+    count = 0;
+    profile["Restrictions"].forEach(element => {
+        if(count > 0)
+            string += ", "
+        string += element;
+        count += 1;
+    });
+    restrictions.textContent = string
+
+
+
+
+
+
+
+    //Buttons and form(functionality stuff)
+    const editButton = document.getElementById("edit");
+    const cancelButton = document.getElementById("cancel")
+    const popup = document.getElementById("popup");
+    const form = document.getElementById("popup-form");
+    const firstnameInput = document.getElementById("firstnameInput");
+    const lastnameInput = document.getElementById("lastnameInput");
+    const dislikesInput = document.getElementById("dislikes-input");
+    const ageInput = document.getElementById("ageInput");
+ 
+
+
+
+
+
+    editButton.onclick = function(){
+        popup.style.display = 'flex';
+    }
+
+    cancelButton.onclick = function(){
+        popup.style.display = 'none';
+        form.reset();
+    }
+
+
   
     // Handle form submission
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      const newItem = input.value.trim();
-  
-      if (newItem) {
-        // Add item to the list
-        const listItem = document.createElement("li");
-        listItem.textContent = newItem;
-        list.appendChild(listItem);
-  
-        // Clear the input
-        input.value = "";
-      }
+      //Name
+      firstname.textContent = firstnameInput.value;
+      profile['First Name'] = firstname.textContent;
+      lastname.textContent = lastnameInput.value;
+      profile['Last Name'] = lastname.textContent;
+      age.textContent = "Age: " + ageInput.value;
+      profile["Age"] = ageInput.value;
+      dislikes.textContent = dislikesInput.value;
+      profile['Dislikes'] = dislikesInput.value;
+      profile["Age"] = ageInput.value;
+
+
+
+      //Cooking level
+      cookingLevelArr = document.querySelectorAll('input[name = "cooking"]:checked');
+      cookingLevel.textContent = "Cooking Level: " + cookingLevelArr[0].value;
+      profile["Cooking Level"] = cookingLevelArr[0].value;
+      //Baking level
+      bakingLevelArr = document.querySelectorAll('input[name = "baking"]:checked');
+      bakingLevel.textContent = "Baking Level: " + bakingLevelArr[0].value;
+      profile["Baking Level"] = BakingLevelArr[0].value;
+
+      
+
+
+      //Restrictions
+      res = []
+      cbs = document.querySelectorAll('input[type = "checkbox"]:checked');
+      cbs.forEach((element) =>{
+        res.push(element.value);
+      });
+
+      profile['Restrictions'] = res;
+
+      string = "";
+      count = 0;
+      profile["Restrictions"].forEach(element => {
+          if(count > 0)
+              string += ", "
+          string += element;
+          count += 1;
+      });
+      restrictions.textContent = string
+
+
+
+      localStorage.setItem('profile', JSON.stringify(profile));
+      popup.style.display = "none";
     });
+
+    inputSubmit.onclick = function(){
+        localStorage.setItem('profile', JSON.stringify(profile));
+        popup.style.display = 'none';
+    }
 
     //https://www.w3schools.com/howto/howto_js_popup.asp
     //Used this source for popup functionality reference
-    var dislikesButton = document.getElementById("dislikes");
-    var dislikesPopup = document.getElementById("dislike-popup");
-    var restrictionsButton = document.getElementById("restrictions");
-    var frButton = document.getElementById("favorite-recipes");
-    var frPopup = document.getElementById("fr-popup");
-    var restrictionsPopup = document.getElementById("restrictions-popup");
-    var cbPopup = document.getElementById("cooking-baking-popup");
-    var cbbutton = document.getElementById("cb-button");
-    dislikesButton.onclick = function() {
-        if (dislikesPopup.style.display == "block"){
-            dislikesPopup.style.display = "none";
-        }
-        else
-            dislikesPopup.style.display = "block";
-        restrictionsPopup.style.display = "none";
-        cbPopup.style.display = "none";
-        frPopup.style.display = "none";
-
-     }
-     //Favorite recipes
-     const frForm = document.getElementById("fr-form");
-     const frInput = document.getElementById("fr-input");
-     const frList = document.getElementById("fr-list");
    
-     // Handle form submission
-     frForm.addEventListener("submit", function (e) {
-       e.preventDefault();
-       const newItem = frInput.value.trim();
-   
-       if (newItem) {
-         // Add item to the list
-         const listItem = document.createElement("li");
-         listItem.textContent = newItem;
-         frList.appendChild(listItem);
-   
-         // Clear the input
-         frInput.value = "";
-       }
-     });
-     frButton.onclick = function() {
-         if (frPopup.style.display == "block"){
-             frPopup.style.display = "none";
-         }
-         else
-             frPopup.style.display = "block";
-         restrictionsPopup.style.display = "none";
-         cbPopup.style.display = "none";
-         dislikesPopup.style.display = "none";
-      }
-
-     //Restrictions
-     const restform = document.getElementById("restrictions-form");
-     const restinput = document.getElementById("restrictions-input");
-     const restlist = document.getElementById("restrictions-list");
-   
-     // Handle form submission
-     restform.addEventListener("submit", function (e) {
-       e.preventDefault();
-       const newItem = restinput.value.trim();
-   
-       if (newItem) {
-         // Add item to the list
-         const listItem = document.createElement("li");
-         listItem.textContent = newItem;
-         restlist.appendChild(listItem);
-   
-         // Clear the input
-         restinput.value = "";
-       }
-     });
- 
      //https://www.w3schools.com/howto/howto_js_popup.asp
      //Used this source for popup functionality reference
 
-     restrictionsButton.onclick = function() {
-        if (restrictionsPopup.style.display == "block"){
-            restrictionsPopup.style.display = "none";
-        }
-        else
-            restrictionsPopup.style.display = "block";
-        dislikesPopup.style.display = "none";
-        cbPopup.style.display = "none";
-        frPopup.style.display = "none";
 
-      }
+
+
+
+
+
  
-      //cooking and baking buttons
-      cbbutton.onclick = function() {
-        if (cbPopup.style.display == "block"){
-            cbPopup.style.display = "none";
-        }
-        else{
-            cbPopup.style.display = "block"
-        }
-        dislikesPopup.style.display = "none";
-        restrictionsPopup.style.display = "none";
-        frPopup.style.display = "none";
-      }
-      var cookLevel = document.getElementById("cooking-level");
-      var bakeLevel = document.getElementById("baking-level");
-      var cookBeg = document.getElementById("cooking-beginner-button");
-      var cookinter = document.getElementById("cooking-inter-button");
-      var cookAdvanced = document.getElementById("cooking-advanced-button");
-      var bakeBeg = document.getElementById("baking-beginner-button");
-      var bakeInter = document.getElementById("baking-inter-button");
-      var bakeAdvanced = document.getElementById("baking-advanced-button");
-
-
-
-      cookBeg.onclick = function() {
-        cookLevel.textContent = "Cooking Level: Beginner";
-        cookBeg.style.backgroundColor = "#00496e"
-        cookinter.style.backgroundColor = "#005c8a"
-        cookAdvanced.style.backgroundColor = "#005c8a"
-
-      }
-      cookinter.onclick = function() {
-        cookLevel.textContent = "Cooking Level: Intermediate";
-        cookinter.style.backgroundColor = "#00496e"
-        cookBeg.style.backgroundColor = "#005c8a"
-        cookAdvanced.style.backgroundColor = "#005c8a"
-
-      }
-      cookAdvanced.onclick = function() {
-        cookLevel.textContent = "Cooking Level: Advanced";
-        cookAdvanced.style.backgroundColor = "#00496e"
-        cookBeg.style.backgroundColor = "#005c8a"
-        cookinter.style.backgroundColor = "#005c8a"
-
-
-
-      }
-      bakeBeg.onclick = function() {
-        bakeLevel.textContent = "Baking Level: Beginner";
-        bakeBeg.style.backgroundColor = "#00496e"
-        bakeInter.style.backgroundColor = "#005c8a"
-        bakeAdvanced.style.backgroundColor = "#005c8a"
-      }
-      bakeInter.onclick = function() {
-        bakeLevel.textContent = "Baking Level: Intermediate";
-        bakeInter.style.backgroundColor = "#00496e"
-        bakeBeg.style.backgroundColor = "#005c8a"
-        bakeAdvanced.style.backgroundColor = "#005c8a"
-      }
-      bakeAdvanced.onclick = function() {
-        bakeLevel.textContent = "Baking Level: Advanced";
-        bakeAdvanced.style.backgroundColor = "#00496e"
-        bakeBeg.style.backgroundColor = "#005c8a"
-        bakeInter.style.backgroundColor = "#005c8a"
-      }
-      
 
   });
   

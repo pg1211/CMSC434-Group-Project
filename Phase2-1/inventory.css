@@ -163,7 +163,7 @@ li {
 }
 
 /* for my itty bitty soft keyboard :3 */
-.keyboardImg {
+.keyboard-img {
     position: absolute;
     bottom: -140;
     width: 100%;

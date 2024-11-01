@@ -1,151 +1,90 @@
-document.addEventListener("DOMContentLoaded", function () {
-    //JSON business
+// Selecting elements
+const editButton = document.getElementById("edit");
+const popup = document.getElementById("popup");
+const form = document.getElementById("popup-form");
+const cancelButton = document.getElementById("cancel");
 
-    profile = JSON.parse(localStorage.getItem('profile'));
-    if (profile == null){
-        profile = {
-            "First Name" : "Jaques",
-            "Last Name" : "Webster",
-            "Age" : 20, 
-            "Dislikes" : "Pineappple",
-            "Cooking Level" : "Beginner",
-            "Baking Level" : "Advanced",
-            "Restrictions" : ["Gluten Free, Vegan"]
-        };
+// Profile fields
+const firstName = document.getElementById("firstname");
+const lastName = document.getElementById("lastname");
+const age = document.getElementById("age");
+const restrictionsText = document.getElementById("restrictions-text");
+const dislikesText = document.getElementById("dislikes-text");
+const cookingLevel = document.getElementById("cooking-level");
+const bakingLevel = document.getElementById("baking-level");
+
+// Input fields in the popup
+const firstNameInput = document.getElementById("firstnameInput");
+const lastNameInput = document.getElementById("lastnameInput");
+const ageInput = document.getElementById("ageInput");
+const dislikesInput = document.getElementById("dislikes-input");
+const restrictionCheckboxes = [
+    document.getElementById("gfcheck"),
+    document.getElementById("pfcheck"),
+    document.getElementById("sfcheck"),
+    document.getElementById("dfcheck"),
+    document.getElementById("vegetariancheck"),
+    document.getElementById("vegancheck")
+];
+const cookingRadios = document.getElementsByName("cooking");
+const bakingRadios = document.getElementsByName("baking");
+
+// Load saved profile data from localStorage on page load
+document.addEventListener("DOMContentLoaded", () => {
+    savedProfile = localStorage.getItem("profile");
+    if (savedProfile) {
+        profile = JSON.parse(savedProfile);
+
+        firstName.textContent = profile.firstName;
+        lastName.textContent = profile.lastName;
+        age.textContent = "Age: " + profile.age;
+        restrictionsText.textContent = profile.restrictions;
+        dislikesText.textContent = profile.dislikes;
+        cookingLevel.textContent = "Cooking Level: " + profile.cookingLevel;
+        bakingLevel.textContent = "Baking Level: " + profile.bakingLevel;
     }
-    localStorage.setItem('profile', JSON.stringify(profile));
+});
 
-    //Information in page
-    const firstname = document.getElementById("firstname");
-    const lastname = document.getElementById("lastname");
+// Show popup
+editButton.addEventListener("click", () => {
+    popup.style.display = "flex";
+});
 
-    //Set values from json
-    firstname.textContent = profile["First Name"];
-    lastname.textContent = profile["Last Name"];
+// Hide popup on cancel
+cancelButton.addEventListener("click", () => {
+    popup.style.display = "none";
+});
 
-    const age = document.getElementById("age");
-    age.textContent = "Age: " + profile["Age"];
-    const dislikes = document.getElementById("dislikes-text");
-    dislikes.textContent = profile["Dislikes"];
-    const cookingLevel = document.getElementById("cooking-level");
-    const bakingLevel = document.getElementById("baking-level");
-    cookingLevel.textContent = "Cooking Level: " + profile["Cooking Level"];
-    bakingLevel.textContent = "Baking Level: " + profile["Baking Level"];
-    const restrictions = document.getElementById("restrictions-text");
+// Handle form submission
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-    string = "";
-    count = 0;
-    profile["Restrictions"].forEach(element => {
-        if(count > 0)
-            string += ", "
-        string += element;
-        count += 1;
-    });
-    restrictions.textContent = string
+    // Gather updated profile data
+    updatedProfile = {
+        firstName: firstNameInput.value,
+        lastName: lastNameInput.value,
+        age: ageInput.value,
+        restrictions: Array.from(restrictionCheckboxes)
+            .filter((checkbox) => checkbox.checked)
+            .map((checkbox) => checkbox.value)
+            .join(", "),
+        dislikes: dislikesInput.value,
+        cookingLevel: Array.from(cookingRadios).find((radio) => radio.checked).value,
+        bakingLevel: Array.from(bakingRadios).find((radio) => radio.checked).value,
+    };
 
+    // Update profile display
+    firstName.textContent = updatedProfile.firstName;
+    lastName.textContent = updatedProfile.lastName;
+    age.textContent = "Age: " + updatedProfile.age;
+    restrictionsText.textContent = updatedProfile.restrictions;
+    dislikesText.textContent = updatedProfile.dislikes;
+    cookingLevel.textContent = "Cooking Level: " + updatedProfile.cookingLevel;
+    bakingLevel.textContent = "Baking Level: " + updatedProfile.bakingLevel;
 
+    // Save to localStorage as a JSON string
+    localStorage.setItem("profile", JSON.stringify(updatedProfile));
 
-
-
-
-
-    //Buttons and form(functionality stuff)
-    const editButton = document.getElementById("edit");
-    const cancelButton = document.getElementById("cancel")
-    const popup = document.getElementById("popup");
-    const form = document.getElementById("popup-form");
-    const firstnameInput = document.getElementById("firstnameInput");
-    const lastnameInput = document.getElementById("lastnameInput");
-    const dislikesInput = document.getElementById("dislikes-input");
-    const ageInput = document.getElementById("ageInput");
- 
-
-
-
-
-
-    editButton.onclick = function(){
-        popup.style.display = 'flex';
-    }
-
-    cancelButton.onclick = function(){
-        popup.style.display = 'none';
-        form.reset();
-    }
-
-
-  
-    // Handle form submission
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      //Name
-      firstname.textContent = firstnameInput.value;
-      profile['First Name'] = firstname.textContent;
-      lastname.textContent = lastnameInput.value;
-      profile['Last Name'] = lastname.textContent;
-      age.textContent = "Age: " + ageInput.value;
-      profile["Age"] = ageInput.value;
-      dislikes.textContent = dislikesInput.value;
-      profile['Dislikes'] = dislikesInput.value;
-      profile["Age"] = ageInput.value;
-
-
-
-      //Cooking level
-      cookingLevelArr = document.querySelectorAll('input[name = "cooking"]:checked');
-      cookingLevel.textContent = "Cooking Level: " + cookingLevelArr[0].value;
-      profile["Cooking Level"] = cookingLevelArr[0].value;
-      //Baking level
-      bakingLevelArr = document.querySelectorAll('input[name = "baking"]:checked');
-      bakingLevel.textContent = "Baking Level: " + bakingLevelArr[0].value;
-      profile["Baking Level"] = BakingLevelArr[0].value;
-
-      
-
-
-      //Restrictions
-      res = []
-      cbs = document.querySelectorAll('input[type = "checkbox"]:checked');
-      cbs.forEach((element) =>{
-        res.push(element.value);
-      });
-
-      profile['Restrictions'] = res;
-
-      string = "";
-      count = 0;
-      profile["Restrictions"].forEach(element => {
-          if(count > 0)
-              string += ", "
-          string += element;
-          count += 1;
-      });
-      restrictions.textContent = string
-
-
-
-      localStorage.setItem('profile', JSON.stringify(profile));
-      popup.style.display = "none";
-    });
-
-    inputSubmit.onclick = function(){
-        localStorage.setItem('profile', JSON.stringify(profile));
-        popup.style.display = 'none';
-    }
-
-    //https://www.w3schools.com/howto/howto_js_popup.asp
-    //Used this source for popup functionality reference
-   
-     //https://www.w3schools.com/howto/howto_js_popup.asp
-     //Used this source for popup functionality reference
-
-
-
-
-
-
-
- 
-
-  });
-  
+    // Hide popup
+    popup.style.display = "none";
+});

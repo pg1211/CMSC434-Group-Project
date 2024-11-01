@@ -69,13 +69,13 @@ function displayRecipes(filteredRecipes) {
         const recipeDiv = document.createElement('div');
         recipeDiv.classList.add('recipe');
         recipeDiv.setAttribute('data-index', index);
-        const stars = '★'.repeat(recipe.rating) + '☆'.repeat(5 - recipe.rating);
+        const stars = '\u2605'.repeat(recipe.rating) + '\u2606'.repeat(5 - recipe.rating);
         recipeDiv.innerHTML = `
             <h3>${recipe.name}</h3>
             <p>Rating: <span class="stars">${stars}</span></p>
             <p>Ingredients: ${recipe.ingredients.join(', ')}</p>
             <button onclick="toggleFavorite(${index})">
-                ${recipe.favorite ? '❤️ Unfavorite' : '🤍 Favorite'}
+                ${recipe.favorite ? '<span style="color: red;">&#x2764;</span> Unfavorite' : '&#x2764 Favorite'}
             </button>
             <button onclick="openModal(${index})">View Details</button>
         `;

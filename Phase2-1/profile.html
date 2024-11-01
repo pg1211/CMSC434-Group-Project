@@ -9,79 +9,79 @@
 <body>
   <div class="device">
   <div class = "allbutnav">
-    <div class="container">
-      <div class = "pfp">
-        <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
+    <div class="profileContainer">
+      <div id = "pfpandage">
+        <div class = "pfp">
+          <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
+        </div>
+        <p id = "age">Age: 21</p>
       </div>
       <div class = "name">
-        <h1>John Doe</h1>  
-        <p>Age: 21</p>
+        <h1 id = "firstname">John</h1>
+        <h1 id = "lastname">Doe</h1>  
       </div>
     </div>
+    <button id = "edit" >Edit</button>
     
-    <div class = "link-container" id= "favorite-recipes">
-      <h2>Favorite Recipes →</h2>
-    </div>
-    <div class="list-container" id = "fr-popup" onclick = "myFunctionFr()">
-      <form id="fr-form">
-        <input type="text" id="fr-input" placeholder="Add a Recipe" required>
-        <button type="submit">Add Recipe</button>
-      </form>
-      
-      <!-- Shopping List Display -->
-      <ul id="fr-list"></ul>
+    <div class = "link-container">
+      <h2>Favorite Recipes:</h2>
+      <p id = "recipes-text"></p>
     </div>
 
-  <div class = "link-container" id= "restrictions">
-    <h2>Dietary Restrictions →</h2>
-  </div>
-  <div class="list-container" id = "restrictions-popup" onclick = "myFunctionRestrictions()">
-    <form id="restrictions-form">
-      <input type="text" id="restrictions-input" placeholder="Add a restriction" required>
-      <button type="submit">Add Restriction</button>
-    </form>
+    <div class = "link-container" id= "restrictions">
+      <h2>Dietary Restrictions:</h2>
+      <p id = "restrictions-text"></p>
+    </div>
     
-    <!-- Shopping List Display -->
-    <ul id="restrictions-list"></ul>
-  </div>
-
   <div class = "link-container" id="dislikes">
-    <h2 >Dislikes →</h2>
+    <h2 >Dislikes:</h2>
+    <p id="dislikes-text"></p>
   </div>
 
-
-  <div class="list-container" id = "dislike-popup" onclick = "myFunction()">
-    <form id="dislike-form">
-      <input type="text" id="dislike-input" placeholder="Add a dislike" required>
-      <button type="submit">Add Dislike</button>
-    </form>
-    
-    <!-- Shopping List Display -->
-    <ul id="dislike-list"></ul>
-  </div>
-
-  <div class = "skill-container" id = "cb-button" onclick = "myFunctionCB()">
-    <h2 id = "cooking-level"> Cooking Level: Beginner</h2>
+  <div class = "skill-container">
+    <h2 id = "cooking-level">Cooking Level: Beginner</h2>
     <h2 id = "baking-level">Baking Level: Beginner</h2>
   </div>
-  <div class="list-container" id = "cooking-baking-popup" >
-    <form id="cooking-baking-form">
-      <div class ="cb-container">
-        <h2>Cooking</h2>
-        <button type ="button" id ="cooking-beginner-button">Beginner</button>
-        <button type="button" id ="cooking-inter-button">Intermediate</button>
-        <button type= "button" id = "cooking-advanced-button">Advanced</button>
-        <h2>Baking</h2>
-        <button type="button" id ="baking-beginner-button">Beginner</button>
-        <button type="button" id ="baking-inter-button">Intermediate</button>
-        <button type="button" id ="baking-advanced-button">Advanced</button>
+
+<!-- Popup stuff-->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <form id = "popup-form">
+      <label>First Name: </label><br>
+      <input type = "text" id = "firstnameInput" required> <br><br>
+      <label>Last Name: </label><br>
+      <input type = "text" id = "lastnameInput" required> <br><br>
+      <label>Age: </label><br>
+      <input type = "number" id = "ageInput" required > <br><br>
+      <label>Restrictions:</label>
+      <br>
+      <div popupcontainer>
+        <input type = "checkbox" id = "gfcheck" value = "Gluten Free">Gluten Free<br>
+        <input type = "checkbox" id = "pfcheck" value = "Peanut Free">Peanut Free<br>
+
+        <input type = "checkbox" id = "sfcheck" value = "Soy Free">Soy Free<br>
+        <input type = "checkbox" id = "dfcheck" value = "Dairy Free">Dairy Free<br>
+
+        <input type = "checkbox" id = "vegetariancheck" value = "Vegetarian">Vegetarian<br> 
+        <input type = "checkbox" id = "vegancheck" value = "Vegan">Vegan 
       </div>
-
+      <br>
+      <label>Dislikes: </label><br>
+      <input type = "text" id = "dislikes-input"> <br> <br>
+      <label>Cooking Skill Level:</label><br>
+      <input type = "radio" name = "cooking" id = "cookBeg" value = "Beginner" required> Beginner <br>
+      <input type = "radio" name = "cooking" id = "cookInt" value = "Intermediate" required> Intermediate <br>
+      <input type = "radio" name = "cooking" id = "cookAdv" value = "Advanced" required> Advanced <br>
+      <br>
+      <label>Baking Skill Level:</label><br>
+      <input type = "radio" name = "baking" id = "bakeBeg" value = "Beginner" required> Beginner <br>
+      <input type = "radio" name = "baking" id = "bakeInt" value = "Intermediate" required> Intermediate <br>
+      <input type = "radio" name = "baking" id = "bakeAdv" value = "Advanced" required> Advanced <br>
+      <br>
+      <input type = "submit" id = "inputSubmit"> <button type = "button" id = "cancel">Cancel</button>
     </form>
-  
-
   </div>
-  
+</div>
 
   <div class="navbar">
     <a href="inventory.html">Inventory</a>

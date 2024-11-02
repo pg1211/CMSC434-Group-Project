@@ -3,6 +3,7 @@ const editButton = document.getElementById("edit");
 const popup = document.getElementById("popup");
 const form = document.getElementById("popup-form");
 const cancelButton = document.getElementById("cancel");
+const gvButton = document.getElementById("group-voting");
 
 // Profile fields
 const firstName = document.getElementById("firstname");
@@ -54,6 +55,10 @@ editButton.addEventListener("click", () => {
 cancelButton.addEventListener("click", () => {
     popup.style.display = "none";
 });
+
+gvButton.addEventListener("click", () => {
+
+})
 
 // Handle form submission
 form.addEventListener("submit", (e) => {

@@ -12,27 +12,108 @@ inventory = JSON.parse(localStorage.getItem('inventory'));
 // shopping section of localStorage
 shopping = JSON.parse(localStorage.getItem("shopping"))
 
-// Initialize shopping data if not in localStorage
 if (shopping == null) {
   shopping = {
-    categories: ["Produce", "Meat", "Dairy", "Grains"],
-    lists: [
-      {
-        name: "Groceries",
-        items: [
-          { name: "Apple", quantity: 6, unit: "none", category: "Produce" },
-          { name: "Chicken", quantity: 12, unit: "oz", category: "Meat" }
+    "categories": ["Produce", "Meat", "Dairy", "Grains"],
+    "items": [
+            {
+                "name": "Apple",
+                "quantity": 6,
+                "unit": "none",
+                "category": "Produce"
+            },
+            {
+                "name": "Chicken",
+                "quantity": 12,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Yogurt",
+                "quantity": 20,
+                "unit": "oz",
+                "category": "Dairy"
+            },
+            {
+                "name": "Bread",
+                "quantity": 3,
+                "unit": "none",
+                "category": "Grains"
+            },
+            {
+                "name": "Pear",
+                "quantity": 3,
+                "unit": "none",
+                "category": "Produce"
+            },
+            {
+                "name": "Cabbage",
+                "quantity": 32,
+                "unit": "oz",
+                "category": "Produce"
+            },
+            {
+                "name": "Soup",
+                "quantity": 16,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Donut",
+                "quantity": 12,
+                "unit": "none",
+                "category": "Grains"
+            },
+            {
+                "name": "Spinach",
+                "quantity": 32,
+                "unit": "none",
+                "category": "Produce"
+            },
+            {
+                "name": "Asparagus",
+                "quantity": 8,
+                "unit": "none",
+                "category": "Produce"
+            },
+            {
+                "name": "Nuggets",
+                "quantity": 32,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Mashed potatoes",
+                "quantity": 17,
+                "unit": "oz",
+                "category": "Produce"
+            },
+            {
+                "name": "Oreos",
+                "quantity": 14,
+                "unit": "none",
+                "category": "Grains"
+            },
+            {
+                "name": "Steak",
+                "quantity": 16,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Meatloaf",
+                "quantity": 26,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Banana",
+                "quantity": 12,
+                "unit": "none",
+                "category": "Produce"
+            }
         ]
-      },
-      {
-        name: "Essentials",
-        items: [
-          { name: "Bread", quantity: 3, unit: "none", category: "Grains" },
-          { name: "Yogurt", quantity: 20, unit: "oz", category: "Dairy" }
-        ]
-      }
-    ]
-  };
+  }
 }
 
 localStorage.setItem('shopping', JSON.stringify(shopping));
@@ -51,21 +132,6 @@ categories.forEach(category => {
     // For cloneNode, https://www.w3schools.com/jsref/met_node_clonenode.asp was referenced
     let categoryOption = option.cloneNode(true);
     itemCategory.appendChild(categoryOption);
-});
-
-// Load list filter into the dropdown for the list selection
-listDropdown = document.getElementById('listDropdown');
-listCategory = document.getElementById('listCategory');
-lists = shopping.lists;
-lists.forEach(list => {
-    let option = document.createElement('option');
-    option.value = list.name;
-    option.textContent = list.name;
-    listDropdown.appendChild(option);
-
-    // For cloneNode, https://www.w3schools.com/jsref/met_node_clonenode.asp was referenced
-    let listOption = option.cloneNode(true);
-    listCategory.appendChild(listOption);
 });
 
 // Render items based on selected category

@@ -25,7 +25,7 @@
 
       <div class="link-container">
         <h2>Favorite Recipes:</h2>
-        <p id="recipes-text"></p>
+        <p id="recipes-text">PB&J, Toast with Butter, Ultimate Butter</p>
       </div>
 
       <div class="link-container" id="restrictions">
@@ -68,22 +68,30 @@
             <br>
             <label>Dislikes: </label><br>
             <input type="text" id="dislikes-input"> <br> <br>
-            <label>Cooking Skill Level:</label><br>
-            <input type="radio" name="cooking" id="cookBeg" value="Beginner" required> Beginner <br>
-            <input type="radio" name="cooking" id="cookInt" value="Intermediate" required> Intermediate <br>
-            <input type="radio" name="cooking" id="cookAdv" value="Advanced" required> Advanced <br>
-            <br>
-            <label>Baking Skill Level:</label><br>
-            <input type="radio" name="baking" id="bakeBeg" value="Beginner" required> Beginner <br>
-            <input type="radio" name="baking" id="bakeInt" value="Intermediate" required> Intermediate <br>
-            <input type="radio" name="baking" id="bakeAdv" value="Advanced" required> Advanced <br>
-            <br>
+            <div class = "skills">
+              <div class = "cookingorbaking">
+                <label>Cooking Level:</label><br>
+                <input type="radio" name="cooking" id="cookBeg" value="Beginner" required> Beginner <br>
+                <input type="radio" name="cooking" id="cookInt" value="Intermediate" required> Intermediate <br>
+                <input type="radio" name="cooking" id="cookAdv" value="Advanced" required> Advanced <br>
+                <br>
+              </div>
+              <div class = "cookingorbaking">
+                <label>Baking Level:</label><br>
+                <input type="radio" name="baking" id="bakeBeg" value="Beginner" required> Beginner <br>
+                <input type="radio" name="baking" id="bakeInt" value="Intermediate" required> Intermediate <br>
+                <input type="radio" name="baking" id="bakeAdv" value="Advanced" required> Advanced <br>
+                <br>
+              </div>
+            </div>
             <input type="submit" id="inputSubmit"> <button type="button" id="cancel">Cancel</button>
           </form>
         </div>
         <img src="local-resources/keyboard.jpg" alt="SoftKeyboard" class="keyboard-img" />
       </div>
-
+      <a href="group-voting.html">
+        <button id = "group-voting">Group Voting</button>
+      </a>
       <div class="navbar">
         <a href="inventory.html">Inventory</a>
         <a href="shopping-lists.html">Shopping</a>
@@ -92,6 +100,7 @@
       </div>
 
     </div>
+
 
     <script src="profile.js"></script>
   </div>

@@ -209,6 +209,8 @@ renderItems = (category) => {
                 </button>
             </div>`;
         }
+
+        // For append child, https://www.w3schools.com/jsref/met_node_appendchild.asp was referenced
         itemList.appendChild(li);
     });
 };
@@ -283,6 +285,7 @@ itemForm.addEventListener('submit', (e) => {
         inventory.items[editIndex] = newItem;
     } else {
         // Add new item
+        // For push, https://www.w3schools.com/jsref/jsref_push.asp was referenced
         inventory.items.push(newItem);
     }
 

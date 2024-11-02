@@ -19,6 +19,12 @@
             <h2 id="votingTitle">Voting for Dinner</h2>
         </header>
 
+        <!-- Entry list -->
+        <div class="voting-list">
+            <ul id="entryList">
+            </ul>
+        </div>
+
         <!-- Navbar -->
         <div class="navbar">
             <a href="inventory.html">Inventory</a>
@@ -26,9 +32,24 @@
             <a href="recipes.html">Recipes</a>
             <a href="profile.html" class="active">Profiles</a>
         </div>
+
+        <!-- Popup for Add Entry -->
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <h2 id="popupTitle">Add Entry</h2>
+                <form id="itemForm">
+                    <label for="itemName">Name:</label>
+                    <input type="text" id="itemName" name="name" required>
+
+                    <button type="submit" id="submitItemButton">Add Entry</button>
+                </form>
+            </div>
+            <img src="local-resources/keyboard.jpg" alt="SoftKeyboard" class="keyboard-img" />
+        </div>
     </div>
 
-    <script src="inventory.js"></script>
+    <script src="group-voting.js"></script>
 </body>
 
 </html>

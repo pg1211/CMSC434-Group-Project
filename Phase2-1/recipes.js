@@ -13,96 +13,125 @@ function showCheckboxes() {
     }
 }
 
-//recipe list functionality **IN PROGRESS**
+//recipe list functionality
 
-// Sample list of recipe objects
+//list of sample recipes
 const recipes = [
     {
-        name: 'Pancakes',
+        name: 'PB&J',
         rating: 4,
-        isFavorite: true,
-        ingredients: ['flour', 'milk', 'eggs', 'sugar', 'butter']
+        favorite: true,
+        ingredients: ['bread', 'peanut butter', 'jelly'],
+        instructions: 'Spread peanut butter on one slice of bread and jelly on another. Then layer the slices together such that the peanut butter and jelly touch.'
     },
     {
-        name: 'Omelette',
+        name: 'Cereal and Milk',
         rating: 5,
-        isFavorite: false,
-        ingredients: ['eggs', 'cheese', 'salt', 'pepper']
+        favorite: false,
+        ingredients: ['cereal', 'milk'],
+        instructions: 'Pour cereal into a bowl and add milk.'
     },
     {
-        name: 'Chocolate Cake',
+        name: 'Toast with Butter',
+        rating: 2,
+        favorite: true,
+        ingredients: ['bread', 'butter'],
+        instructions: 'Cook bread in the toaster and then spread butter on it.'
+    },
+    {
+        name: 'Spaghetti Marinara',
+        rating: 4,
+        favorite: false,
+        ingredients: ['spaghetti', 'marinara sauce',],
+        instructions: 'Boil the spaghetti and microwave a cup of marina sauce. Pour the sauce onto the spaghetti.'
+    },
+    {
+        name: 'Grilled Cheese Sandwich',
+        rating: 1,
+        favorite: false,
+        ingredients: ['bread', 'cheese', 'butter'],
+        instructions: 'Butter two slices of bread and place cheese between them on the unbuttered sides. Then cook it in a pan on the stove or grill.'
+    },
+    {
+        name: 'Ultimate Butter',
         rating: 3,
-        isFavorite: true,
-        ingredients: ['flour', 'cocoa', 'sugar', 'eggs', 'butter']
+        favorite: true,
+        ingredients: ['butter', 'peanut butter'],
+        instructions: 'Combine butter and peanut butter in a bowl and whisk together.'
     }
 ];
 
-// Function to display recipes in the HTML
+//display the list of recipes
 function displayRecipes(filteredRecipes) {
     const recipeList = document.getElementById('recipe-list');
-    recipeList.innerHTML = ''; // Clear current list
+    recipeList.innerHTML = '';
     filteredRecipes.forEach((recipe, index) => {
         const recipeDiv = document.createElement('div');
         recipeDiv.classList.add('recipe');
-        recipeDiv.setAttribute('data-index', index); // Store the index for referencing later
+        recipeDiv.setAttribute('data-index', index);
+        const stars = '\u2605'.repeat(recipe.rating) + '\u2606'.repeat(5 - recipe.rating);
         recipeDiv.innerHTML = `
             <h3>${recipe.name}</h3>
-            <p>Rating: ${recipe.rating}</p>
+            <p>Rating: <span class="stars">${stars}</span></p>
             <p>Ingredients: ${recipe.ingredients.join(', ')}</p>
-            <p>${recipe.isFavorite ? '❤️ Favorite' : ''}</p>
+            <button onclick="toggleFavorite(${index})">
+                ${recipe.favorite ? '<span style="color: red;">&#x2764;</span> Unfavorite' : '&#x2764 Favorite'}
+            </button>
+            <button onclick="openModal(${index})">View Details</button>
         `;
-        recipeDiv.onclick = () => openModal(index); // Attach click event to open modal
         recipeList.appendChild(recipeDiv);
     });
 }
 
-// Function to filter recipes based on user inputs
+//filter the recipes
+//uses placeholder for current inventory
 function filterRecipes() {
-    const isFavoriteChecked = document.getElementById('fav').checked;
-    const isInventoryChecked = document.getElementById('inv').checked;
-    const isPositiveChecked = document.getElementById('pos').checked;
+    const favoriteChecked = document.getElementById('fav').checked;
+    const inventoryChecked = document.getElementById('inv').checked;
+    const ratingChecked = document.getElementById('pos').checked;
 
-    // Define inventory (this could be dynamically managed)
-    const inventoryIngredients = ['flour', 'milk', 'eggs', 'sugar', 'butter', 'cheese', 'salt', 'pepper'];
+    //inventory placeholder
+    //in the final app this will be connected to the inventory page
+    const currentInventory = ['bread', 'peanut butter', 'milk', 'butter', 'cheese'];
 
     const filteredRecipes = recipes.filter(recipe => {
-        const meetsFavoriteCriteria = !isFavoriteChecked || recipe.isFavorite;
-        const meetsPositiveCriteria = !isPositiveChecked || recipe.rating >= 4;
-        const meetsInventoryCriteria = !isInventoryChecked || recipe.ingredients.every(ingredient => inventoryIngredients.includes(ingredient));
+        const favoriteEnough = !favoriteChecked || recipe.favorite;
+        const ratedEnough = !ratingChecked || recipe.rating >= 3;
+        const ingredientsEnough = !inventoryChecked || recipe.ingredients.every(ingredient => currentInventory.includes(ingredient));
 
-        return meetsFavoriteCriteria && meetsPositiveCriteria && meetsInventoryCriteria;
+        return favoriteEnough && ratedEnough && ingredientsEnough;
     });
 
     displayRecipes(filteredRecipes);
 }
 
-// Function to open the modal with recipe details
+//open individual recipe modal
 function openModal(index) {
     const recipe = recipes[index];
     document.getElementById('modal-recipe-name').innerText = recipe.name;
-    document.getElementById('modal-recipe-rating').innerText = `Rating: ${recipe.rating}`;
+    document.getElementById('modal-recipe-rating').innerHTML = `Rating: <span class="stars">${'★'.repeat(recipe.rating)}${'☆'.repeat(5 - recipe.rating)}</span>`;
     document.getElementById('modal-recipe-ingredients').innerText = `Ingredients: ${recipe.ingredients.join(', ')}`;
+    document.getElementById('modal-recipe-instructions').innerText = `Instructions: ${recipe.instructions}`;
     document.getElementById('recipeModal').style.display = 'block';
 }
 
-// Function to close the modal
+//close modal
 function closeModal() {
     document.getElementById('recipeModal').style.display = 'none';
 }
 
-// Display all recipes initially
+//favorite or unfavorite recipes
+function toggleFavorite(index) {
+    recipes[index].favorite = !recipes[index].favorite;
+    filterRecipes();
+}
+
+//display recipes
 displayRecipes(recipes);
 
-// Show/Hide filter checkboxes
+//show checkboxes
 function showCheckboxes() {
     const checkboxes = document.getElementById('checkBoxes');
     checkboxes.style.display = checkboxes.style.display === "block" ? "none" : "block";
 }
 
-// Close the modal if user clicks outside of the modal content
-window.onclick = function(event) {
-    const modal = document.getElementById('recipeModal');
-    if (event.target == modal) {
-        closeModal();
-    }
-};

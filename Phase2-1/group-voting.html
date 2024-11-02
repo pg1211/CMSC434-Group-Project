@@ -1,78 +1,55 @@
 <html lang="en">
+
 <head>
-  <title>Group Voting</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="group-voting.css">
+    <title>Group Voting</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="group-voting.css">
 </head>
 
 <body>
-  <div class="device">
-    <div class="container">
-    <h2>My Group</h2> 
-    </div>
+    <div class="device">
+        <!-- Header -->
+        <header class="header-bar">
+            <div id="headerButtonDiv">
+                <a href="profile.html">
+                    <button class="header-button" id="backButton">← Back to Profile</button>
+                </a>
+                <button class="header-button" id="addEntryButton">Add Entry</button>
+            </div>
+            <h2 id="votingTitle">Voting for Dinner</h2>
+        </header>
 
-    <div class = "recipe-voting-container">
-        <div class="recipe-block">
-            <div class="recipe">
-                <div class = "button-name">
-                    <input type = "radio" name = "r1">
-                    <p>Baked Ziti</p>
-                </div>
-                    <b>1</b>
-            </div>
-            <div class="recipe">
-                <div class = "button-name">
-                    <input type = "radio" name = "r1">
-                    <p>Spaghetti</p>
-                </div>
-                    <b>2</b>
-            </div>
-            <div class="recipe">
-                <div class = "button-name">
-                    <input type = "radio" name = "r1">
-                    <p>Meatloaf</p>
-                </div>
-                    <b>0</b>
-            </div>
-            <div class = "button-box">
-                <div class="plus">
-                    <p>+</p>
-                </div>
-                <div class = "minus">
-                    <p>-</p>
-                </div>
-            </div>
-
+        <!-- Entry list -->
+        <div class="voting-list">
+            <ul id="entryList">
+            </ul>
         </div>
 
-    </div>
-    <div class = backcontainer>
-        <div class = "back">
-            <b>←Back</b>
-        </div>
+        <!-- Navbar -->
         <div class="navbar">
             <a href="inventory.html">Inventory</a>
             <a href="shopping-lists.html">Shopping</a>
             <a href="recipes.html">Recipes</a>
-            <a href="profile.html">Profiles</a>
-          </div>
+            <a href="profile.html" class="active">Profiles</a>
+        </div>
+
+        <!-- Popup for Add Entry -->
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <h2 id="popupTitle">Add Entry</h2>
+                <form id="itemForm">
+                    <label for="itemName">Name:</label>
+                    <input type="text" id="itemName" name="name" required>
+
+                    <button type="submit" id="submitItemButton">Add Entry</button>
+                </form>
+            </div>
+            <img src="local-resources/keyboard.jpg" alt="SoftKeyboard" class="keyboard-img" />
+        </div>
     </div>
 
-
- 
-
-
-</div>
-
-  
-
-
-
-
-</div>
-</divd>
-
-
-  <script src="profile.js"></script>
+    <script src="group-voting.js"></script>
 </body>
+
 </html>

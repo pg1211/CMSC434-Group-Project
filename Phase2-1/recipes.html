@@ -8,8 +8,9 @@
 
 <body>
   <div class="device">
-
+    <!--header bar-->
     <header class="header-bar">
+      <!--filter dropdown-->
       <div class="multipleSelection">
           <div class="selectBox" onclick="showCheckboxes()">
               <select>
@@ -36,21 +37,22 @@
 
   <div class="recipe-list" id="recipe-list"></div>
 
-  <!-- The Modal -->
+  <!--recipe modal-->
   <div id="recipeModal" class="modal">
       <div class="modal-content">
-          <span class="close" onclick="closeModal()">&times;</span>
+          <span class="closeButton" onclick="closeModal()">&times;</span>
           <h3 id="modal-recipe-name"></h3>
           <p id="modal-recipe-rating"></p>
           <p id="modal-recipe-ingredients"></p>
+          <p id="modal-recipe-instructions"></p>
       </div>
   </div>
 
 <!-- Navbar -->
 <div class="navbar">
-  <a href="inventory.html" class="active">Inventory</a>
+  <a href="inventory.html">Inventory</a>
   <a href="shopping-lists.html">Shopping</a>
-  <a href="recipes.html">Recipes</a>
+  <a href="recipes.html" class="active">Recipes</a>
   <a href="profile.html">Profiles</a>
 </div>
 

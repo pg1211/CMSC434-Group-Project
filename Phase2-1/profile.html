@@ -8,70 +8,93 @@
 
 <body>
   <div class="device">
-  <div class = "allbutnav">
-    <div class="container">
-      <div class = "pfp">
-        <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
+    <div class="allbutnav">
+      <div class="profileContainer">
+        <div id="pfpandage">
+          <div class="pfp">
+            <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
+          </div>
+          <p id="age">Example age</p>
+        </div>
+        <div class="name">
+          <h1 id="firstname">Example first</h1>
+          <h1 id="lastname">Example last</h1>
+        </div>
       </div>
-      <div class = "name">
-        <h1>John Doe</h1>  
-        <p>Age: 21</p>
-      </div>
-    </div>
-    <div class = "favorite-recipe-container">
-    <h2>Favorite Recipes →</h2>
-    <div class="container-recipes">
-    <div class = "recipe-item">
-      <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
-      <p>Fried Chicken</p>
-    </div>
-    <div class = "recipe-item">
-      <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
-      <p>Stromboli</p>
-    </div>
-    <div class = "recipe-item">
-      <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
-      <p>Spaghetti</p>
-    </div>
+      <button id="edit">Edit</button>
 
-    <div class = "recipe-item">
-      <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
-      <p>Cheddar Mac</p>
-    </div>
-    <div class = "recipe-item">
-      <img src="local-resources/profile-pic.jpg" alt="Your profile picture">
-      <p>Apple Pie</p>
-    </div>
+      <div class="link-container">
+        <h2>Favorite Recipes:</h2>
+        <p id="recipes-text"></p>
       </div>
 
+      <div class="link-container" id="restrictions">
+        <h2>Dietary Restrictions:</h2>
+        <p id="restrictions-text"></p>
+      </div>
+
+      <div class="link-container" id="dislikes">
+        <h2>Dislikes:</h2>
+        <p id="dislikes-text"></p>
+      </div>
+
+      <div class="skill-container">
+        <h2 id="cooking-level">Cooking Level: Beginner</h2>
+        <h2 id="baking-level">Baking Level: Beginner</h2>
+      </div>
+
+      <!-- Popup stuff-->
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <form id="popup-form">
+            <label>First Name: </label><br>
+            <input type="text" id="firstnameInput" required> <br><br>
+            <label>Last Name: </label><br>
+            <input type="text" id="lastnameInput" required> <br><br>
+            <label>Age: </label><br>
+            <input type="number" id="ageInput" required> <br><br>
+            <label>Restrictions:</label>
+            <br>
+            <div popupcontainer>
+              <input type="checkbox" id="gfcheck" value="Gluten Free">Gluten Free<br>
+              <input type="checkbox" id="pfcheck" value="Peanut Free">Peanut Free<br>
+
+              <input type="checkbox" id="sfcheck" value="Soy Free">Soy Free<br>
+              <input type="checkbox" id="dfcheck" value="Dairy Free">Dairy Free<br>
+
+              <input type="checkbox" id="vegetariancheck" value="Vegetarian">Vegetarian<br>
+              <input type="checkbox" id="vegancheck" value="Vegan">Vegan
+            </div>
+            <br>
+            <label>Dislikes: </label><br>
+            <input type="text" id="dislikes-input"> <br> <br>
+            <label>Cooking Skill Level:</label><br>
+            <input type="radio" name="cooking" id="cookBeg" value="Beginner" required> Beginner <br>
+            <input type="radio" name="cooking" id="cookInt" value="Intermediate" required> Intermediate <br>
+            <input type="radio" name="cooking" id="cookAdv" value="Advanced" required> Advanced <br>
+            <br>
+            <label>Baking Skill Level:</label><br>
+            <input type="radio" name="baking" id="bakeBeg" value="Beginner" required> Beginner <br>
+            <input type="radio" name="baking" id="bakeInt" value="Intermediate" required> Intermediate <br>
+            <input type="radio" name="baking" id="bakeAdv" value="Advanced" required> Advanced <br>
+            <br>
+            <input type="submit" id="inputSubmit"> <button type="button" id="cancel">Cancel</button>
+          </form>
+        </div>
+        <img src="local-resources/keyboard.jpg" alt="SoftKeyboard" class="keyboard-img" />
+      </div>
+
+      <div class="navbar">
+        <a href="inventory.html">Inventory</a>
+        <a href="shopping-lists.html">Shopping</a>
+        <a href="recipes.html">Recipes</a>
+        <a href="profile.html" class="active">Profiles</a>
+      </div>
+
     </div>
 
-  <div class = "link-container">
-    <h2>Dietary Restrictions: Gluten</h2>
+    <script src="profile.js"></script>
   </div>
-  <div class = "link-container">
-    <h2>Dislikes →</h2>
-  </div>
-
-  <div class = "skill-container">
-    <h2>Cooking Level: Beginner</h2>
-    <h2>Baking Level: Beginner</h2>
-  </div>
-  
-
-  </div>
-  
-
-  <div class="navbar">
-    <a href="inventory.html">Inventory</a>
-    <a href="shopping-lists.html">Shopping</a>
-    <a href="recipes.html" >Recipes</a>
-    <a href="profile.html"class="active">Profiles</a>
-  </div>
-</div>
-
-
-  <script src="profile.js"></script>
 </body>
 
 </html>

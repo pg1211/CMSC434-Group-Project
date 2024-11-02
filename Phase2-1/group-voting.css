@@ -1,118 +1,299 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-.button-name{
-    display: flex;
-    min-width: 100px;
-    flex-direction: row;
-    gap: 10px
+.header-bar {
+    background-color: #005c8a;
+    padding-top: 20px;
+    color: white;
+    border-bottom: 5px solid rgba(0, 0, 0, 0.1);
 }
 
-body {
-    background-color: #f4f4f4;
-    padding: 20px;
+#headerButtonDiv {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
-h2 {
-    text-align: left;
+
+.header-button {
+    background-color: white;
+    margin-left: 5px;
+    color: black;
+    font-size: 25px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: auto;
+}
+
+.header-button:hover {
+    background-color: #d5d5d5;
+}
+
+#votingTitle {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
     font-size: 50px;
 }
-.recipe-block{
-    display: flex;
-    flex-direction: column;
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    align-items: left;
-    justify-content: left;
-    gap: 30px;
 
-  
+.voting-list {
+    padding: 0px 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-bottom: 105px;
+    /* Padding at bottom causes menu bottom to move up! :D thank god! */
 }
-.button-box{
-    display: flex;
 
-}
-.plus{
-    display: flex;
-    max-width: 600px;
-    min-width: 10px;
-    margin: 0 auto;
-    background-color: green;
-    padding: 5px;
-    min-width: 30px;
-    min-height: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+button {
+    background-color: white;
+    margin-left: 5px;
+    color: black;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    align-content: center;
-    justify-content: center;
+    transition: background-color 0.3s ease;
+    height: 40px;
 }
-.minus{
-    display: flex;
-    max-width: 600px;
-    min-width: 30px;
-    min-height: 30px;
-    margin: 0 auto;
-    background-color: red;
-    padding: 5px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    align-content: center;
-    justify-content: center;
 
+button:hover {
+    background-color: #d5d5d5;
 }
-.recipe{
+
+.inventory-list {
+    padding: 0px 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-bottom: 105px;
+    /* Padding at bottom causes menu bottom to move up! :D thank god! */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    color: black;
+    font-size: 30px;
+    border: 2px solid rgba(76, 76, 76, 0.3);
+    padding: 15px 10px;
     display: flex;
-    flex-direction: row;
-    max-width: 600px;
-    min-width: 500px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    align-items: left;
-    justify-content: left;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.item-name {
+    font-weight: bold;
+    font-size: 45px;
+    flex: 1;
+}
+
+.item-votes {
+    font-size: 20px;
+    color: gray;
+    margin-left: 400px;
+    position: absolute;
+}
+
+.plus-button {
+    font-size: 20px;
+    padding: 5px 15px;
+    margin-right: 7px;  /* I know theres definetly a better way to do this, but fuck it */
+}
+
+.voted-button {
+    font-size: 20px;
+    padding: 5px 15px;
+}
+
+.item-quantity {
+    font-size: 14px;
+    margin-right: 0px;
+    color: gray;
+}
+
+.item-unit {
+    font-size: 14px;
+    margin-left: 0px;
+    color: gray;
+}
+
+.item-buttons {
+    display: flex;
     gap: 10px;
+}
 
-  
+.plus-button {
+    background-color: #9cff79;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
 }
-.recipe b{
-    margin-left: 100px;
+
+.plus-button:hover {
+    background-color: #8ae369;
 }
-.allbutnav{
-    display:flex;
-    flex-direction: column;
+
+.voted-button {
+    background-color: #ff1919;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
 }
-.backcontainer{
-    display: flex;
-    flex-direction: column;
+
+.voted-button:hover {
+    background-color: #d71515;
 }
-.back{
-    display: flex;
-    max-width: 100px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    cursor:pointer;
+
+.minus-button {
+    background-color: #f3ff74;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    border: none;
+    border-radius: 40px;
+    padding: 5px 15px;
+    cursor: pointer;
 }
-.container {
-    display: flex;
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+.minus-button:hover {
+    background-color: #d5df64;
+}
+
+.delete-icon {
+    width: 20px;
+    height: 25px;
+    pointer-events: none; /* This might be the single stupidest line I have ever had the displeasure of writing, courtesy of event listeners. */
+}
+
+.delete-button {
+    background-color: #ff6767;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    border: none;
+    border-radius: 40px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #de5a5a;
+}
+
+.popup {
+    display: none;
+    position: absolute;
+    top: -140;  /* done to make room for the soft keyboard */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
     justify-content: center;
     align-items: center;
+}
 
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    position: relative;
+}
+
+/* for my itty bitty soft keyboard :3 */
+.keyboard-img {
+    position: absolute;
+    bottom: -140;
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Now these dont look the same. CSS is the bane of my existence. */
+#itemName {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#itemQuantity {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* I don't know why, but the unit dropdown is not getting the same style as all the others in the popup :( */
+#itemUnit {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#itemCategory {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#submitItemButton {
+    margin-top: 15px;
+    margin-left: 0px;
+    width: 100%;
+    padding: 10px;
+    background-color: #005c8a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#submitItemButton:hover {
+    background-color: #004669;
 }

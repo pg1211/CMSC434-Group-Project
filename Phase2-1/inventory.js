@@ -23,6 +23,22 @@
 
 // I had a field day determining that removing const was the only thing I needed to make this work for all edge cases.
 // use localStorage.clear(); if want to get a clean inventory slate
+// Need to do this for profile, that way gets loaded in initially
+profile = JSON.parse(localStorage.getItem('profile'));
+
+if (profile == null) {
+    profile = {
+        "firstName": "Jaques",
+        "lastName": "Webster",
+        "age": 20,
+        "restrictions": ["Gluten Free, Vegan"],
+        "dislikes": "Pineappple",
+        "cookingLevel": "Beginner",
+        "bakingLevel": "Advanced",
+    }
+    localStorage.setItem('profile', JSON.stringify(profile));
+}
+
 inventory = JSON.parse(localStorage.getItem('inventory'));
 
 if (inventory == null) {
@@ -193,6 +209,8 @@ renderItems = (category) => {
                 </button>
             </div>`;
         }
+
+        // For append child, https://www.w3schools.com/jsref/met_node_appendchild.asp was referenced
         itemList.appendChild(li);
     });
 };
@@ -267,6 +285,7 @@ itemForm.addEventListener('submit', (e) => {
         inventory.items[editIndex] = newItem;
     } else {
         // Add new item
+        // For push, https://www.w3schools.com/jsref/jsref_push.asp was referenced
         inventory.items.push(newItem);
     }
 

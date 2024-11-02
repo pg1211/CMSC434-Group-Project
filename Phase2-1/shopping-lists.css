@@ -147,6 +147,7 @@ li {
 
 .minus-button:hover {
   background-color: #d5df64;
+  background-color: rgb(253, 240, 96);
 }
 
 .delete-icon {

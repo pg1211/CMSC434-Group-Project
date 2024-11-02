@@ -16,9 +16,11 @@
   height: 100%;
 }
 
-/* I'm losing my mind. This is to try to line up the dropdown, filter, and add item button */
+
 #filterButton {
   padding: 10px 15px;
+  /* color: #0071EB; */
+  /* color: white; */
 }
 
 #listDropdown {

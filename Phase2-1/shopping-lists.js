@@ -5,7 +5,7 @@
 // are incredibly similar pages; really the main difference is that items
 // can be moved from the shopping li to inventory. hence, yeah.
 
-// localStorage.clear()
+localStorage.clear()
 
 // inventory section of localStorage
 inventory = JSON.parse(localStorage.getItem('inventory'));
@@ -114,6 +114,13 @@ if (shopping == null) {
             }
         ]
   }
+}
+
+if (inventory == null) {
+    inventory = {
+        "categories": ["Produce", "Meat", "Dairy", "Grains"],
+        "items": []
+    }
 }
 
 localStorage.setItem('shopping', JSON.stringify(shopping));

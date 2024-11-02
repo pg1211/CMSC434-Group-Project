@@ -13,9 +13,9 @@ inventory = JSON.parse(localStorage.getItem('inventory'));
 shopping = JSON.parse(localStorage.getItem("shopping"))
 
 if (shopping == null) {
-  shopping = {
-    "categories": ["Produce", "Meat", "Dairy", "Grains"],
-    "items": [
+    shopping = {
+        "categories": ["Produce", "Meat", "Dairy", "Grains"],
+        "items": [
             {
                 "name": "Apple",
                 "quantity": 6,
@@ -113,7 +113,7 @@ if (shopping == null) {
                 "category": "Produce"
             }
         ]
-  }
+    }
 }
 
 localStorage.setItem('shopping', JSON.stringify(shopping));
@@ -239,14 +239,14 @@ document.getElementById('itemList').addEventListener('click', (e) => {
     } else if (e.target.classList.contains('delete-button')) {
         shopping.items.splice(index, 1);
     } else if (e.target.classList.contains('inventory-button')) {
-      // remove item from shopping list and create temp
-      item = shopping.items.splice(index, 1);
+        // remove item from shopping list and create temp
+        item = shopping.items.splice(index, 1);
 
-      // now, append it to the inventory list
-      inventory.items.push(item[0]);
+        // now, append it to the inventory list
+        inventory.items.push(item[0]);
 
-      // Save updated inventory to localStorage and re-render
-      localStorage.setItem('inventory', JSON.stringify(inventory));
+        // Save updated inventory to localStorage and re-render
+        localStorage.setItem('inventory', JSON.stringify(inventory));
     }
 
     // Update localStorage and re-render items

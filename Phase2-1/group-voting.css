@@ -78,7 +78,7 @@ li {
     color: black;
     font-size: 30px;
     border: 2px solid rgba(76, 76, 76, 0.3);
-    padding: 15px 10px;
+    padding: 20px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -94,21 +94,33 @@ li {
 }
 
 .item-votes {
-    font-size: 20px;
+    font-size: 25px;
     color: gray;
-    margin-left: 400px;
+    margin-left: 330px;
     position: absolute;
 }
 
 .plus-button {
-    font-size: 20px;
-    padding: 5px 15px;
-    margin-right: 7px;  /* I know theres definetly a better way to do this, but fuck it */
+    font-size: 30px;
+    padding: 25px 35px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: #9cff79;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 40px;
+    margin-right: 10px;
 }
 
 .voted-button {
-    font-size: 20px;
-    padding: 5px 15px;
+    font-size: 30px;
+    padding: 25px 35px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: none;
+    border-radius: 40px;
 }
 
 .item-quantity {
@@ -126,14 +138,6 @@ li {
 .item-buttons {
     display: flex;
     gap: 10px;
-}
-
-.plus-button {
-    background-color: #9cff79;
-    color: rgb(0, 0, 0);
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
 }
 
 .plus-button:hover {
@@ -201,10 +205,15 @@ li {
 
 .popup-content {
     background-color: white;
-    padding: 20px;
+    font-size: 25px;
+    padding: 10px 40px 20px 40px;
     border-radius: 5px;
     width: 300px;
     position: relative;
+}
+
+#popupTitle {
+    font-size: 36px;
 }
 
 /* for my itty bitty soft keyboard :3 */
@@ -223,7 +232,7 @@ li {
     display: block;
     width: 100%;
     padding: 10px;
-    font-size: 16px;
+    font-size: 25px;
     border-radius: 5px;
     border: 1px solid #ccc;
     margin-top: 10px;
@@ -268,6 +277,7 @@ label {
 
 input {
     width: 100%;
+    font-size: 30px;
     padding: 8px;
     margin-top: 5px;
     border-radius: 5px;
@@ -283,11 +293,16 @@ input {
 }
 
 #submitItemButton {
-    margin-top: 15px;
+    margin-top: 25px;
     margin-left: 0px;
+    font-size: 30px;
     width: 100%;
-    padding: 10px;
+    padding: 25px;
     background-color: #005c8a;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
     border: none;
     border-radius: 5px;

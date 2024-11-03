@@ -31,7 +31,7 @@ if (profile == null) {
         "firstName": "Jaques",
         "lastName": "Webster",
         "age": 20,
-        "restrictions": ["Gluten Free, Vegan"],
+        "restrictions": ["Gluten Free", "Vegan"],
         "dislikes": "Pineappple",
         "cookingLevel": "Beginner",
         "bakingLevel": "Advanced",

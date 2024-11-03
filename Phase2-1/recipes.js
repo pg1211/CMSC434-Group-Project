@@ -1,3 +1,18 @@
+profile = JSON.parse(localStorage.getItem('profile'));
+
+if (profile == null) {
+    profile = {
+        "firstName": "Jaques",
+        "lastName": "Webster",
+        "age": 20,
+        "restrictions": ["Gluten Free", "Vegan"],
+        "dislikes": "Pineappple",
+        "cookingLevel": "Beginner",
+        "bakingLevel": "Advanced",
+    }
+    localStorage.setItem('profile', JSON.stringify(profile));
+}
+
 // search filter
 //based on code from https://www.geeksforgeeks.org/how-to-use-checkbox-inside-select-option-using-javascript/
 let show = true;
@@ -15,51 +30,80 @@ function showCheckboxes() {
 
 //recipe list functionality
 
+//uncomment if you need to alter recipes
+localStorage.removeItem('recipes');
+
 //list of sample recipes
-const recipes = [
+recipes = JSON.parse(localStorage.getItem('recipes'));
+if (recipes == null) {
+    recipes = [
     {
         name: 'PB&J',
         rating: 4,
         favorite: true,
-        ingredients: ['bread', 'peanut butter', 'jelly'],
+        ingredients: [{foodItem: 'bread', amount: 20}, {foodItem: 'peanut butter', amount: 20}, {foodItem: 'jelly', amount: 20}],
+        restrictedFor: ['Gluten Free', 'Peanut Free'],
         instructions: 'Spread peanut butter on one slice of bread and jelly on another. Then layer the slices together such that the peanut butter and jelly touch.'
     },
     {
         name: 'Cereal and Milk',
         rating: 5,
         favorite: false,
-        ingredients: ['cereal', 'milk'],
+        ingredients: [{foodItem: 'cereal', amount: 20}, {foodItem: 'milk', amount: 20}],
+        restrictedFor: ['Dairy Free', 'Vegan'],
         instructions: 'Pour cereal into a bowl and add milk.'
     },
     {
         name: 'Toast with Butter',
         rating: 2,
         favorite: true,
-        ingredients: ['bread', 'butter'],
+        ingredients: [{foodItem: 'bread', amount: 20}, {foodItem: 'butter', amount: 20}],
+        restrictedFor: ['Gluten Free', 'Dairy Free', 'Vegan'],
         instructions: 'Cook bread in the toaster and then spread butter on it.'
     },
     {
         name: 'Spaghetti Marinara',
         rating: 4,
         favorite: false,
-        ingredients: ['spaghetti', 'marinara sauce',],
+        ingredients: [{foodItem: 'spaghetti', amount: 20}, {foodItem: 'marinara sauce', amount: 20}],
+        restrictedFor: ['Gluten Free'],
         instructions: 'Boil the spaghetti and microwave a cup of marina sauce. Pour the sauce onto the spaghetti.'
     },
     {
         name: 'Grilled Cheese Sandwich',
         rating: 1,
         favorite: false,
-        ingredients: ['bread', 'cheese', 'butter'],
+        ingredients: [{foodItem: 'bread', amount: 20}, {foodItem: 'cheese', amount: 20}, {foodItem: 'butter', amount: 20}],
+        restrictedFor: ['Gluten Free', 'Dairy Free', 'Vegan'],
         instructions: 'Butter two slices of bread and place cheese between them on the unbuttered sides. Then cook it in a pan on the stove or grill.'
     },
     {
         name: 'Ultimate Butter',
         rating: 3,
         favorite: true,
-        ingredients: ['butter', 'peanut butter'],
+        ingredients: [{foodItem: 'butter', amount: 20}, {foodItem: 'peanut butter', amount: 20}],
+        restrictedFor: ['Dairy Free', 'Peanut Free', 'Vegan'],
         instructions: 'Combine butter and peanut butter in a bowl and whisk together.'
+    },
+    {
+        name: 'Boiled Carrots',
+        rating: 1,
+        favorite: false,
+        ingredients: [{foodItem: 'carrot', amount: 20}],
+        restrictedFor: [],
+        instructions: 'Boil the carrots in a pot of water.'
+    },
+    {
+        name: 'Fruit Salad',
+        rating: 3,
+        favorite: true,
+        ingredients: [{foodItem: 'banana', amount: 20}, {foodItem: 'strawberry', amount: 20}, {foodItem: 'orange', amount: 20}],
+        restrictedFor: [],
+        instructions: 'Slice up and toss together fruits. Add sugar to taste.'
     }
-];
+    ]
+localStorage.setItem('recipes', JSON.stringify(recipes));
+}
 
 //display the list of recipes
 function displayRecipes(filteredRecipes) {
@@ -73,7 +117,7 @@ function displayRecipes(filteredRecipes) {
         recipeDiv.innerHTML = `
             <h3>${recipe.name}</h3>
             <p>Rating: <span class="stars">${stars}</span></p>
-            <p>Ingredients: ${recipe.ingredients.join(', ')}</p>
+            <p>Ingredients: ${recipe.ingredients.map(item => item.foodItem || 'error').join(', ')}</p>
             <button onclick="toggleFavorite(${index})">
                 ${recipe.favorite ? '<span style="color: red;">&#x2764;</span> Unfavorite' : '&#x2764 Favorite'}
             </button>
@@ -97,9 +141,12 @@ function filterRecipes() {
     const filteredRecipes = recipes.filter(recipe => {
         const favoriteEnough = !favoriteChecked || recipe.favorite;
         const ratedEnough = !ratingChecked || recipe.rating >= 3;
-        const ingredientsEnough = !inventoryChecked || recipe.ingredients.every(ingredient => currentInventory.includes(ingredient));
+        const ingredientsEnough = !inventoryChecked || recipe.ingredients.every(ingredient => currentInventory.includes(ingredient.foodItem));
+        console.log('Profile Restrictions:', profile.restrictions);
+        console.log('Recipe Restrictions:', recipe.restrictedFor);
+        const unrestricted = profile.restrictions.every(restriction => !recipe.restrictedFor.includes(restriction));
 
-        return favoriteEnough && ratedEnough && ingredientsEnough;
+        return favoriteEnough && ratedEnough && ingredientsEnough && unrestricted;
     });
 
     displayRecipes(filteredRecipes);
@@ -110,7 +157,7 @@ function openModal(index) {
     const recipe = recipes[index];
     document.getElementById('modal-recipe-name').innerText = recipe.name;
     document.getElementById('modal-recipe-rating').innerHTML = `Rating: <span class="stars">${'★'.repeat(recipe.rating)}${'☆'.repeat(5 - recipe.rating)}</span>`;
-    document.getElementById('modal-recipe-ingredients').innerText = `Ingredients: ${recipe.ingredients.join(', ')}`;
+    document.getElementById('modal-recipe-ingredients').innerText = `Ingredients: ${recipe.ingredients.map(item => item.foodItem).join(', ')}`;
     document.getElementById('modal-recipe-instructions').innerText = `Instructions: ${recipe.instructions}`;
     document.getElementById('recipeModal').style.display = 'block';
 }
@@ -123,11 +170,12 @@ function closeModal() {
 //favorite or unfavorite recipes
 function toggleFavorite(index) {
     recipes[index].favorite = !recipes[index].favorite;
+    localStorage.setItem('recipes', JSON.stringify(recipes));
     filterRecipes();
 }
 
 //display recipes
-displayRecipes(recipes);
+filterRecipes(recipes);
 
 //show checkboxes
 function showCheckboxes() {

@@ -31,7 +31,7 @@ function showCheckboxes() {
 //recipe list functionality
 
 //uncomment if you need to alter recipes
-localStorage.removeItem('recipes');
+// localStorage.removeItem('recipes');
 
 //list of sample recipes
 recipes = JSON.parse(localStorage.getItem('recipes'));
@@ -156,7 +156,7 @@ function filterRecipes() {
 function openModal(index) {
     const recipe = recipes[index];
     document.getElementById('modal-recipe-name').innerText = recipe.name;
-    document.getElementById('modal-recipe-rating').innerHTML = `Rating: <span class="stars">${'★'.repeat(recipe.rating)}${'☆'.repeat(5 - recipe.rating)}</span>`;
+    document.getElementById('modal-recipe-rating').innerHTML = `Rating: <span class="stars">${'\u2605'.repeat(recipe.rating)}${'\u2606'.repeat(5 - recipe.rating)}</span>`;
     document.getElementById('modal-recipe-ingredients').innerText = `Ingredients: ${recipe.ingredients.map(item => item.foodItem).join(', ')}`;
     document.getElementById('modal-recipe-instructions').innerText = `Instructions: ${recipe.instructions}`;
     document.getElementById('recipeModal').style.display = 'block';

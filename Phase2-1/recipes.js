@@ -13,6 +13,114 @@ if (profile == null) {
     localStorage.setItem('profile', JSON.stringify(profile));
 }
 
+inventory = JSON.parse(localStorage.getItem('inventory'));
+
+if (inventory == null) {
+    inventory = {
+        "categories": ["Produce", "Meat", "Dairy", "Grains"],
+        "items": [
+            {
+                "name": "Apple",
+                "quantity": 6,
+                "unit": "none",
+                "category": "Produce"
+            },
+            {
+                "name": "Chicken",
+                "quantity": 12,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Yogurt",
+                "quantity": 20,
+                "unit": "oz",
+                "category": "Dairy"
+            },
+            {
+                "name": "Bread",
+                "quantity": 3,
+                "unit": "none",
+                "category": "Grains"
+            },
+            {
+                "name": "Pear",
+                "quantity": 3,
+                "unit": "none",
+                "category": "Produce"
+            },
+            {
+                "name": "Cabbage",
+                "quantity": 32,
+                "unit": "oz",
+                "category": "Produce"
+            },
+            {
+                "name": "Soup",
+                "quantity": 16,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Donut",
+                "quantity": 12,
+                "unit": "none",
+                "category": "Grains"
+            },
+            {
+                "name": "Spinach",
+                "quantity": 32,
+                "unit": "none",
+                "category": "Produce"
+            },
+            {
+                "name": "Asparagus",
+                "quantity": 8,
+                "unit": "none",
+                "category": "Produce"
+            },
+            {
+                "name": "Nuggets",
+                "quantity": 32,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Mashed potatoes",
+                "quantity": 17,
+                "unit": "oz",
+                "category": "Produce"
+            },
+            {
+                "name": "Oreos",
+                "quantity": 14,
+                "unit": "none",
+                "category": "Grains"
+            },
+            {
+                "name": "Steak",
+                "quantity": 16,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Meatloaf",
+                "quantity": 26,
+                "unit": "oz",
+                "category": "Meat"
+            },
+            {
+                "name": "Banana",
+                "quantity": 12,
+                "unit": "none",
+                "category": "Produce"
+            }
+        ]
+    };
+    localStorage.setItem('inventory', JSON.stringify(inventory));
+}
+
+
 // search filter
 //based on code from https://www.geeksforgeeks.org/how-to-use-checkbox-inside-select-option-using-javascript/
 let show = true;
@@ -31,7 +139,7 @@ function showCheckboxes() {
 //recipe list functionality
 
 //uncomment if you need to alter recipes
-localStorage.removeItem('recipes');
+//localStorage.removeItem('recipes');
 
 //list of sample recipes
 recipes = JSON.parse(localStorage.getItem('recipes'));
@@ -109,19 +217,19 @@ localStorage.setItem('recipes', JSON.stringify(recipes));
 function displayRecipes(filteredRecipes) {
     const recipeList = document.getElementById('recipe-list');
     recipeList.innerHTML = '';
-    filteredRecipes.forEach((recipe, index) => {
+    filteredRecipes.forEach((recipe) => {
         const recipeDiv = document.createElement('div');
         recipeDiv.classList.add('recipe');
-        recipeDiv.setAttribute('data-index', index);
+        recipeDiv.setAttribute('data-name', recipe.name);
         const stars = '\u2605'.repeat(recipe.rating) + '\u2606'.repeat(5 - recipe.rating);
         recipeDiv.innerHTML = `
             <h3>${recipe.name}</h3>
             <p>Rating: <span class="stars">${stars}</span></p>
             <p>Ingredients: ${recipe.ingredients.map(item => item.foodItem || 'error').join(', ')}</p>
-            <button onclick="toggleFavorite(${index})">
+            <button onclick="toggleFavorite('${recipe.name}')">
                 ${recipe.favorite ? '<span style="color: red;">&#x2764;</span> Unfavorite' : '&#x2764 Favorite'}
             </button>
-            <button onclick="openModal(${index})">View Details</button>
+            <button onclick="openModal('${recipe.name}')">View Details</button>
         `;
         recipeList.appendChild(recipeDiv);
     });
@@ -136,14 +244,18 @@ function filterRecipes() {
 
     //inventory placeholder
     //in the final app this will be connected to the inventory page
-    const currentInventory = ['bread', 'peanut butter', 'milk', 'butter', 'cheese'];
+    //const currentInventory = ['bread', 'peanut butter', 'milk', 'butter', 'cheese'];
 
     const filteredRecipes = recipes.filter(recipe => {
         const favoriteEnough = !favoriteChecked || recipe.favorite;
         const ratedEnough = !ratingChecked || recipe.rating >= 3;
-        const ingredientsEnough = !inventoryChecked || recipe.ingredients.every(ingredient => currentInventory.includes(ingredient.foodItem));
-        console.log('Profile Restrictions:', profile.restrictions);
-        console.log('Recipe Restrictions:', recipe.restrictedFor);
+        //const ingredientsEnough = !inventoryChecked || recipe.ingredients.every(ingredient => currentInventory.includes(ingredient.foodItem));
+        const ingredientsEnough = !inventoryChecked || recipe.ingredients.every(ingredient => {
+            const inventoryItem = inventory.items.find(item => item.name.toLowerCase() === ingredient.foodItem.toLowerCase());
+            console.log(`Checking ingredient: ${ingredient.foodItem} - Inventory: ${inventoryItem ? inventoryItem.quantity : 'Not Found'}`);
+            return inventoryItem && inventoryItem.quantity >= ingredient.amount; // Check if the item exists and has enough quantity
+        });
+
         const unrestricted = profile.restrictions.every(restriction => !recipe.restrictedFor.includes(restriction));
 
         return favoriteEnough && ratedEnough && ingredientsEnough && unrestricted;
@@ -153,8 +265,8 @@ function filterRecipes() {
 }
 
 //open individual recipe modal
-function openModal(index) {
-    const recipe = recipes[index];
+function openModal(name) {
+    const recipe = recipes.find(recipe => recipe.name === name);
     document.getElementById('modal-recipe-name').innerText = recipe.name;
     document.getElementById('modal-recipe-rating').innerHTML = `Rating: <span class="stars">${'★'.repeat(recipe.rating)}${'☆'.repeat(5 - recipe.rating)}</span>`;
     document.getElementById('modal-recipe-ingredients').innerText = `Ingredients: ${recipe.ingredients.map(item => item.foodItem).join(', ')}`;
@@ -168,14 +280,17 @@ function closeModal() {
 }
 
 //favorite or unfavorite recipes
-function toggleFavorite(index) {
-    recipes[index].favorite = !recipes[index].favorite;
+function toggleFavorite(name) {
+    const recipe = recipes.find(recipe => recipe.name === name);
+    if (recipe) {
+    recipe.favorite = !recipe.favorite;
     localStorage.setItem('recipes', JSON.stringify(recipes));
     filterRecipes();
+    }
 }
 
 //display recipes
-filterRecipes(recipes);
+filterRecipes();
 
 //show checkboxes
 function showCheckboxes() {

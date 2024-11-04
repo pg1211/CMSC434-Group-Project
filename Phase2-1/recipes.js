@@ -139,7 +139,7 @@ function showCheckboxes() {
 //recipe list functionality
 
 //uncomment if you need to alter recipes
-localStorage.removeItem('recipes');
+//localStorage.removeItem('recipes');
 
 //list of sample recipes
 recipes = JSON.parse(localStorage.getItem('recipes'));
@@ -217,19 +217,19 @@ localStorage.setItem('recipes', JSON.stringify(recipes));
 function displayRecipes(filteredRecipes) {
     const recipeList = document.getElementById('recipe-list');
     recipeList.innerHTML = '';
-    filteredRecipes.forEach((recipe, index) => {
+    filteredRecipes.forEach((recipe) => {
         const recipeDiv = document.createElement('div');
         recipeDiv.classList.add('recipe');
-        recipeDiv.setAttribute('data-index', index);
+        recipeDiv.setAttribute('data-name', recipe.name);
         const stars = '\u2605'.repeat(recipe.rating) + '\u2606'.repeat(5 - recipe.rating);
         recipeDiv.innerHTML = `
             <h3>${recipe.name}</h3>
             <p>Rating: <span class="stars">${stars}</span></p>
             <p>Ingredients: ${recipe.ingredients.map(item => item.foodItem || 'error').join(', ')}</p>
-            <button onclick="toggleFavorite(${index})">
+            <button onclick="toggleFavorite('${recipe.name}')">
                 ${recipe.favorite ? '<span style="color: red;">&#x2764;</span> Unfavorite' : '&#x2764 Favorite'}
             </button>
-            <button onclick="openModal(${index})">View Details</button>
+            <button onclick="openModal('${recipe.name}')">View Details</button>
         `;
         recipeList.appendChild(recipeDiv);
     });
@@ -265,10 +265,10 @@ function filterRecipes() {
 }
 
 //open individual recipe modal
-function openModal(index) {
-    const recipe = recipes[index];
+function openModal(name) {
+    const recipe = recipes.find(recipe => recipe.name === name);
     document.getElementById('modal-recipe-name').innerText = recipe.name;
-    document.getElementById('modal-recipe-rating').innerHTML = `Rating: <span class="stars">${'\u2605'.repeat(recipe.rating)}${'\u2606'.repeat(5 - recipe.rating)}</span>`;
+    document.getElementById('modal-recipe-rating').innerHTML = `Rating: <span class="stars">${'★'.repeat(recipe.rating)}${'☆'.repeat(5 - recipe.rating)}</span>`;
     document.getElementById('modal-recipe-ingredients').innerText = `Ingredients: ${recipe.ingredients.map(item => item.foodItem).join(', ')}`;
     document.getElementById('modal-recipe-instructions').innerText = `Instructions: ${recipe.instructions}`;
     document.getElementById('recipeModal').style.display = 'block';
@@ -280,14 +280,17 @@ function closeModal() {
 }
 
 //favorite or unfavorite recipes
-function toggleFavorite(index) {
-    recipes[index].favorite = !recipes[index].favorite;
+function toggleFavorite(name) {
+    const recipe = recipes.find(recipe => recipe.name === name);
+    if (recipe) {
+    recipe.favorite = !recipe.favorite;
     localStorage.setItem('recipes', JSON.stringify(recipes));
     filterRecipes();
+    }
 }
 
 //display recipes
-filterRecipes(recipes);
+filterRecipes();
 
 //show checkboxes
 function showCheckboxes() {

@@ -283,3 +283,28 @@ input {
 #submitItemButton:hover {
   background-color: #004669;
 }
+
+/* Popup message styling */
+.popup-message {
+  display: none; /* Hidden by default */
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #3A8340; /* Green background to indicate success */
+  color: white;
+  border-radius: 4px;
+  font-size: 16px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: fadeInOut 2s;
+}
+
+/* Animation for fading in and out */
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}

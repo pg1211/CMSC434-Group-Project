@@ -244,6 +244,8 @@ document.getElementById('itemList').addEventListener('click', (e) => {
 
         // now, append it to the inventory list
         inventory.items.push(item[0]);
+        // console.log(item[0]['name']);
+        showPopupMessage(item[0]['name']);
 
         // Save updated inventory to localStorage and re-render
         localStorage.setItem('inventory', JSON.stringify(inventory));
@@ -253,6 +255,18 @@ document.getElementById('itemList').addEventListener('click', (e) => {
     localStorage.setItem('shopping', JSON.stringify(shopping));
     renderItems(categoryDropdown.value);
 });
+
+// Function to show the popup message
+function showPopupMessage(item) {
+    const popupMessage = document.getElementById('popupMessage');
+    popupMessage.style.display = 'block';
+    popupMessage.innerHTML = `${item} has been sent to inventory!`
+
+    // Hide the popup after 2 seconds
+    setTimeout(() => {
+        popupMessage.style.display = 'none';
+    }, 3000);
+}
 
 // Add/Edit item form submission
 itemForm.addEventListener('submit', (e) => {

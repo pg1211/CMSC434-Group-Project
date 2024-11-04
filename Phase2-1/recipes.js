@@ -1,3 +1,8 @@
+//load in local storage objects
+//these pieces of code are largely taken from profile.js and inventory.js
+//they are originally authored by Will and Jadon
+
+//load in profile
 profile = JSON.parse(localStorage.getItem('profile'));
 
 if (profile == null) {
@@ -13,6 +18,7 @@ if (profile == null) {
     localStorage.setItem('profile', JSON.stringify(profile));
 }
 
+//load in inventory
 inventory = JSON.parse(localStorage.getItem('inventory'));
 
 if (inventory == null) {
@@ -141,7 +147,8 @@ function showCheckboxes() {
 //uncomment if you need to alter recipes
 //localStorage.removeItem('recipes');
 
-//list of sample recipes
+//list of recipes
+//these recipes will be loaded into local storage
 recipes = JSON.parse(localStorage.getItem('recipes'));
 if (recipes == null) {
     recipes = [
@@ -236,26 +243,17 @@ function displayRecipes(filteredRecipes) {
 }
 
 //filter the recipes
-//uses placeholder for current inventory
 function filterRecipes() {
     const favoriteChecked = document.getElementById('fav').checked;
     const inventoryChecked = document.getElementById('inv').checked;
     const ratingChecked = document.getElementById('pos').checked;
-
-    //inventory placeholder
-    //in the final app this will be connected to the inventory page
-    //const currentInventory = ['bread', 'peanut butter', 'milk', 'butter', 'cheese'];
-
     const filteredRecipes = recipes.filter(recipe => {
         const favoriteEnough = !favoriteChecked || recipe.favorite;
         const ratedEnough = !ratingChecked || recipe.rating >= 3;
-        //const ingredientsEnough = !inventoryChecked || recipe.ingredients.every(ingredient => currentInventory.includes(ingredient.foodItem));
         const ingredientsEnough = !inventoryChecked || recipe.ingredients.every(ingredient => {
-            const inventoryItem = inventory.items.find(item => item.name.toLowerCase() === ingredient.foodItem.toLowerCase());
-            console.log(`Checking ingredient: ${ingredient.foodItem} - Inventory: ${inventoryItem ? inventoryItem.quantity : 'Not Found'}`);
-            return inventoryItem && inventoryItem.quantity >= ingredient.amount; // Check if the item exists and has enough quantity
+            const inventoryMatch = inventory.items.find(item => item.name.toLowerCase() === ingredient.foodItem.toLowerCase());
+            return inventoryMatch && inventoryMatch.quantity >= ingredient.amount;
         });
-
         const unrestricted = profile.restrictions.every(restriction => !recipe.restrictedFor.includes(restriction));
 
         return favoriteEnough && ratedEnough && ingredientsEnough && unrestricted;
@@ -297,4 +295,3 @@ function showCheckboxes() {
     const checkboxes = document.getElementById('checkBoxes');
     checkboxes.style.display = checkboxes.style.display === "block" ? "none" : "block";
 }
-

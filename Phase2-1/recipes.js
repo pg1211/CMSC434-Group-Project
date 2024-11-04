@@ -145,7 +145,7 @@ function showCheckboxes() {
 //recipe list functionality
 
 //uncomment if you need to alter recipes
-//localStorage.removeItem('recipes');
+// localStorage.removeItem('recipes');
 
 //list of recipes
 //these recipes will be loaded into local storage
@@ -156,7 +156,7 @@ if (recipes == null) {
         name: 'PB&J',
         rating: 4,
         favorite: true,
-        ingredients: [{foodItem: 'bread', amount: 20}, {foodItem: 'peanut butter', amount: 20}, {foodItem: 'jelly', amount: 20}],
+        ingredients: [{foodItem: 'bread', amount: 1}, {foodItem: 'peanut butter', amount: 1}, {foodItem: 'jelly', amount: 1}],
         restrictedFor: ['Gluten Free', 'Peanut Free'],
         instructions: 'Spread peanut butter on one slice of bread and jelly on another. Then layer the slices together such that the peanut butter and jelly touch.'
     },
@@ -164,7 +164,7 @@ if (recipes == null) {
         name: 'Cereal and Milk',
         rating: 5,
         favorite: false,
-        ingredients: [{foodItem: 'cereal', amount: 20}, {foodItem: 'milk', amount: 20}],
+        ingredients: [{foodItem: 'cereal', amount: 1}, {foodItem: 'milk', amount: 1}],
         restrictedFor: ['Dairy Free', 'Vegan'],
         instructions: 'Pour cereal into a bowl and add milk.'
     },
@@ -172,7 +172,7 @@ if (recipes == null) {
         name: 'Toast with Butter',
         rating: 2,
         favorite: true,
-        ingredients: [{foodItem: 'bread', amount: 20}, {foodItem: 'butter', amount: 20}],
+        ingredients: [{foodItem: 'bread', amount: 1}, {foodItem: 'butter', amount: 1}],
         restrictedFor: ['Gluten Free', 'Dairy Free', 'Vegan'],
         instructions: 'Cook bread in the toaster and then spread butter on it.'
     },
@@ -180,7 +180,7 @@ if (recipes == null) {
         name: 'Spaghetti Marinara',
         rating: 4,
         favorite: false,
-        ingredients: [{foodItem: 'spaghetti', amount: 20}, {foodItem: 'marinara sauce', amount: 20}],
+        ingredients: [{foodItem: 'spaghetti', amount: 1}, {foodItem: 'marinara sauce', amount: 1}],
         restrictedFor: ['Gluten Free'],
         instructions: 'Boil the spaghetti and microwave a cup of marina sauce. Pour the sauce onto the spaghetti.'
     },
@@ -188,7 +188,7 @@ if (recipes == null) {
         name: 'Grilled Cheese Sandwich',
         rating: 1,
         favorite: false,
-        ingredients: [{foodItem: 'bread', amount: 20}, {foodItem: 'cheese', amount: 20}, {foodItem: 'butter', amount: 20}],
+        ingredients: [{foodItem: 'bread', amount: 1}, {foodItem: 'cheese', amount: 1}, {foodItem: 'butter', amount: 1}],
         restrictedFor: ['Gluten Free', 'Dairy Free', 'Vegan'],
         instructions: 'Butter two slices of bread and place cheese between them on the unbuttered sides. Then cook it in a pan on the stove or grill.'
     },
@@ -196,7 +196,7 @@ if (recipes == null) {
         name: 'Ultimate Butter',
         rating: 3,
         favorite: true,
-        ingredients: [{foodItem: 'butter', amount: 20}, {foodItem: 'peanut butter', amount: 20}],
+        ingredients: [{foodItem: 'butter', amount: 1}, {foodItem: 'peanut butter', amount: 1}],
         restrictedFor: ['Dairy Free', 'Peanut Free', 'Vegan'],
         instructions: 'Combine butter and peanut butter in a bowl and whisk together.'
     },
@@ -204,7 +204,7 @@ if (recipes == null) {
         name: 'Boiled Carrots',
         rating: 1,
         favorite: false,
-        ingredients: [{foodItem: 'carrot', amount: 20}],
+        ingredients: [{foodItem: 'carrot', amount: 1}],
         restrictedFor: [],
         instructions: 'Boil the carrots in a pot of water.'
     },
@@ -212,7 +212,7 @@ if (recipes == null) {
         name: 'Fruit Salad',
         rating: 3,
         favorite: true,
-        ingredients: [{foodItem: 'banana', amount: 20}, {foodItem: 'strawberry', amount: 20}, {foodItem: 'orange', amount: 20}],
+        ingredients: [{foodItem: 'banana', amount: 1}, {foodItem: 'strawberry', amount: 1}, {foodItem: 'orange', amount: 1}],
         restrictedFor: [],
         instructions: 'Slice up and toss together fruits. Add sugar to taste.'
     }
@@ -266,7 +266,7 @@ function filterRecipes() {
 function openModal(name) {
     const recipe = recipes.find(recipe => recipe.name === name);
     document.getElementById('modal-recipe-name').innerText = recipe.name;
-    document.getElementById('modal-recipe-rating').innerHTML = `Rating: <span class="stars">${'★'.repeat(recipe.rating)}${'☆'.repeat(5 - recipe.rating)}</span>`;
+    document.getElementById('modal-recipe-rating').innerHTML = `Rating: <span class="stars">${'\u2605'.repeat(recipe.rating)}${'\u2606'.repeat(5 - recipe.rating)}</span>`;
     document.getElementById('modal-recipe-ingredients').innerText = `Ingredients: ${recipe.ingredients.map(item => item.foodItem).join(', ')}`;
     document.getElementById('modal-recipe-instructions').innerText = `Instructions: ${recipe.instructions}`;
     document.getElementById('recipeModal').style.display = 'block';

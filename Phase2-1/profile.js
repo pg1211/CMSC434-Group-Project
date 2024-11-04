@@ -13,6 +13,7 @@ const restrictionsText = document.getElementById("restrictions-text");
 const dislikesText = document.getElementById("dislikes-text");
 const cookingLevel = document.getElementById("cooking-level");
 const bakingLevel = document.getElementById("baking-level");
+const favoriteRecipes = document.getElementById("recipes-text");
 
 // Input fields in the popup
 const firstNameInput = document.getElementById("firstnameInput");
@@ -33,7 +34,8 @@ const bakingRadios = document.getElementsByName("baking");
 // Load saved profile data from localStorage on page load
 document.addEventListener("DOMContentLoaded", () => {
     savedProfile = localStorage.getItem("profile");
-    if (savedProfile) {
+    lsRecipes = JSON.parse(localStorage.getItem("recipes"));
+    if (savedProfile != null) {
         profile = JSON.parse(savedProfile);
 
         firstName.textContent = profile.firstName;
@@ -41,8 +43,33 @@ document.addEventListener("DOMContentLoaded", () => {
         age.textContent = "Age: " + profile.age;
         restrictionsText.textContent = profile.restrictions.join(", ");
         dislikesText.textContent = profile.dislikes;
+        if(profile.dislikes == ""){
+            dislikesText.textContent = "None";
+        }
+        else{
+            dislikesText.textContent = profile.dislikes;
+        }
+        if(profile.restrictions.join(", ") == ""){
+            restrictionsText.textContent = "None";
+        }
+        else{
+            restrictionsText.textContent = profile.restrictions.join(", ");
+        }
         cookingLevel.textContent = "Cooking Level: " + profile.cookingLevel;
         bakingLevel.textContent = "Baking Level: " + profile.bakingLevel;
+    }
+
+    if (lsRecipes != null) {
+        favoriteRecipesArr = [];
+        lsRecipes.forEach(recipe => {
+            if(recipe.favorite ){
+                favoriteRecipesArr.push(recipe.name);
+            }
+        });
+        favoriteRecipes.textContent = favoriteRecipesArr.join(", ");
+    }
+    else{
+        favoriteRecipes.textContent = "None";
     }
 });
 
@@ -55,10 +82,6 @@ editButton.addEventListener("click", () => {
 cancelButton.addEventListener("click", () => {
     popup.style.display = "none";
 });
-
-gvButton.addEventListener("click", () => {
-
-})
 
 // Handle form submission
 form.addEventListener("submit", (e) => {
@@ -81,8 +104,18 @@ form.addEventListener("submit", (e) => {
     firstName.textContent = updatedProfile.firstName;
     lastName.textContent = updatedProfile.lastName;
     age.textContent = "Age: " + updatedProfile.age;
-    restrictionsText.textContent = updatedProfile.restrictions.join(", ");
-    dislikesText.textContent = updatedProfile.dislikes;
+    if(updatedProfile.dislikes == ""){
+        dislikesText.textContent = "None";
+    }
+    else{
+        dislikesText.textContent = updatedProfile.dislikes;
+    }
+    if(updatedProfile.restrictions.join(", ") == ""){
+        restrictionsText.textContent = "None";
+    }
+    else{
+        restrictionsText.textContent = updatedProfile.restrictions.join(", ");
+    }
     cookingLevel.textContent = "Cooking Level: " + updatedProfile.cookingLevel;
     bakingLevel.textContent = "Baking Level: " + updatedProfile.bakingLevel;
 

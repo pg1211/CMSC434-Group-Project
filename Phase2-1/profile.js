@@ -71,8 +71,7 @@ form.addEventListener("submit", (e) => {
         age: ageInput.value,
         restrictions: Array.from(restrictionCheckboxes)
             .filter((checkbox) => checkbox.checked)
-            .map((checkbox) => checkbox.value)
-            .join(", "),
+            .map((checkbox) => checkbox.value),
         dislikes: dislikesInput.value,
         cookingLevel: Array.from(cookingRadios).find((radio) => radio.checked).value,
         bakingLevel: Array.from(bakingRadios).find((radio) => radio.checked).value,
@@ -82,7 +81,7 @@ form.addEventListener("submit", (e) => {
     firstName.textContent = updatedProfile.firstName;
     lastName.textContent = updatedProfile.lastName;
     age.textContent = "Age: " + updatedProfile.age;
-    restrictionsText.textContent = updatedProfile.restrictions;
+    restrictionsText.textContent = updatedProfile.restrictions.join(", ");
     dislikesText.textContent = updatedProfile.dislikes;
     cookingLevel.textContent = "Cooking Level: " + updatedProfile.cookingLevel;
     bakingLevel.textContent = "Baking Level: " + updatedProfile.bakingLevel;

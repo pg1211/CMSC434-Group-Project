@@ -37,7 +37,3 @@ This group project is an interactive web application that allows users to manage
 4. The application will open in your default web browser.
 
 This project is licensed under the MIT License. See the LICENSE file for details.
-
---- 
-
-This text version removes all styles and is purely plain text, suitable for environments that do not support styling. Let me know if you need further adjustments!

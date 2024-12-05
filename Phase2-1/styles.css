@@ -38,7 +38,7 @@ icons: white
   display: flex;
   justify-content: space-around;
   padding: 0 0;
-  border-top: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid rgba(0, 0, 0, 0.35);
   position: absolute;
   bottom: 0;
   height: 110px;
@@ -62,7 +62,7 @@ icons: white
 }
 
 .navbar a.active {
-  background-color: rgba(0, 0, 0, 0.1); /* Darker background for active tab */
+  background-color: rgba(0, 0, 0, 0.35); /* Darker background for active tab */
 }
 
 h1 {
